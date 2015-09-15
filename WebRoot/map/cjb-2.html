@@ -1,0 +1,567 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+<head>  
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK">  
+    <meta name="keywords" content="jquery,ui,easy,easyui,web">  
+    <meta name="description" content="easyui help you build your web page easily!">  
+<link rel="stylesheet" type="text/css" href="../themes/sunny/easyui.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<script type="text/javascript" src="../jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/datagrid-groupview.js"></script>  
+	<script>
+		$(function(){
+			var lastIndex;	
+			$('#tt').datagrid({
+			});
+		});
+		$(function(){
+			var lastIndex;	
+			$('#jm').datagrid({
+			});
+		});
+		$(function(){
+			var lastIndex;	
+			$('#fcczfxx').datagrid({
+			});
+		});
+	function cacultetdmj(){
+			var qzysmj= $('#qzysmj').val();
+			if(isNaN(qzysmj)){
+				qzysmj = 0;
+			}
+			var qzmsmj= $('#qzmsmj').val();
+			if(isNaN(qzmsmj)){
+				qzmsmj = 0;
+			}
+			var qzjsmj= $('#qzjsmj').val();
+			if(isNaN(qzjsmj)){
+				qzjsmj = 0;
+			}
+			var qzczmj= $('#qzczmj').val();
+			if(isNaN(qzczmj)){
+				qzczmj = 0;
+			}
+			var qzczfcyddfjntdsystdmj= $('#qzczfcyddfjntdsystdmj').val();
+			if(isNaN(qzczfcyddfjntdsystdmj)){
+				qzczfcyddfjntdsystdmj = 0;
+			}
+			$('#tdzmj').val(parseFloat(qzysmj)+parseFloat(qzmsmj)+parseFloat(qzjsmj)+parseFloat(qzczmj)+parseFloat(qzczfcyddfjntdsystdmj));
+	}
+	function cacultedj(){
+		var tdzmj = $('#tdzmj').val();
+		var tdzj = $('#tdzj').val();
+		if(parseFloat(tdzmj)>=0){
+			$('#tddj').val( Math.round(parseFloat(tdzj)/parseFloat(tdzmj),2));
+		}else{
+			$('#tddj').val("0.00");
+		}
+	}
+	</script>
+</head>  
+<body>
+	<h2>土地信息</h2>
+	
+
+<div class="easyui-panel" title="" style="width:1200px">
+	<div id="aa" class="easyui-accordion" style="width:1200px;height:700px;">
+		<div title="土地基础信息" selected:true" style="overflow:auto;padding:10px;" border="true">
+			<form id="tdjcxx" method="post">
+			<table id="tdjcxx" width="100%" border="1px" cellpadding="2" cellspacing="0" >
+				<tr>
+					<td>
+						土地证类型：
+					</td>
+					<td>
+						国有土地使用权证
+					</td>
+					<td>
+						土地证号：
+					</td>
+					<td>
+						晋国用(2012)第100392-5号
+					</td>
+					<td>
+						发证日期：
+					</td>
+					<td>
+						2012年3月1日
+					</td>
+					<td>
+						土地来源：
+					</td>
+					<td colspan="2">
+						转让
+					</td>
+				</tr>
+				<tr>
+					<td>
+						协议书号：
+					</td>
+					<td>
+						2012-001
+					</td>
+					<td>
+						取得土地时间：
+					</td>
+					<td>
+						2012年3月1日
+					</td>
+					<td>
+						土地使用税税额：
+					</td>
+					<td>
+						3元/年.平方米
+					</td>
+					<td>
+						征期类型：
+					</td>
+					<td colspan="2">
+						按半年
+				</tr>
+				<tr>
+					<td>
+						土地面积来源：
+					</td>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+						土地面积来源时间：
+					</td>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+						使用年限起：
+					</td>
+					<td>
+						2012年4月1日
+					</td>
+					<td>
+						使用年限止：
+					</td>
+					<td colspan="2">
+						2082年3月31日
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="3">
+						土地坐落地
+					</td>
+					<td>
+						类型：
+					</td>
+					<td colspan="7">
+						建制镇
+					</td>
+				</tr>
+				<tr>
+					<td>
+						所属乡镇：
+					</td>
+					<td colspan="7">
+						昆阳街道办事处
+					</td>
+				</tr>
+				<tr>
+					<td>
+						详细地址：
+					</td>
+					<td colspan="7">
+						晋宁县昆阳镇永乐大街10号
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="6">
+						土地面积
+					</td>
+					<td>
+						土地总面积：
+					</td>
+					<td colspan="7">
+						20000.00
+					</td>
+				</tr>
+				<tr>
+					<td>
+						其中应税面积：
+					</td>
+					<td colspan="7">
+						20000.00
+					</td>
+				</tr>
+				<tr>
+					<td>
+						其中免税面积：
+					</td>
+					<td colspan="7">
+						0.00
+					</td>
+				</tr>
+				<tr>
+					<td>
+						其中减少面积：
+					</td>
+					<td colspan="7">
+						0.00
+					</td>
+				</tr>
+				<tr>
+					<td>
+						其中出租面积：
+					</td>
+					<td colspan="7">
+						0.00
+					</td>
+				</tr>
+				<tr>
+					<td>
+						其中出租房产约定对方缴纳土地使用税土地面积：
+					</td>
+					<td colspan="7">
+						0.00
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="2">
+						土地价格
+					</td>
+					<td>
+						总价：
+					</td>
+					<td colspan="7">
+						12000000.00
+					</td>
+				</tr>
+				<tr>
+					<td>
+						单价(元/平方米)
+					</td>
+					<td colspan="7">
+						600
+					</td>
+				</tr>
+				<tr>
+					<td rowspan="2">
+						计入房产原值的地价
+					</td>
+					<td rowspan="2">
+						32000.00
+					</td>
+					<td rowspan="2">
+						土地地价款
+					</td>
+					<td>
+						土地出让金：
+					</td>
+					<td>
+						5000000.00
+					</td>
+					<td>
+						耕地占用税：
+					</td>
+					<td>
+						20000.00
+					</td>
+					<td>
+						契税：
+					</td>
+					<td>
+						10000.00
+					</td>
+				</tr>
+				<tr>
+					<td>
+						土地开发成本：
+					</td>
+					<td>
+						1000.00
+					</td>
+					<td>
+						其他：
+					</td>
+					<td colspan="3">
+						0.00
+					</td>
+				</tr>
+				<tr>
+					<td>
+						房产容积率：0.37
+					</td>
+					<td>
+						&nbsp;
+					</td>
+					<td>
+						房产建筑面积：
+					</td>
+					<td colspan="2">
+						7403.00
+					</td>
+					<td>
+						房产原值：100000.00
+					</td>
+					<td colspan="3">
+						&nbsp;
+					</td>
+				</tr>
+			</table>
+			</form>
+		</div>
+		<div title="土地所有方信息" style="padding:10px;">
+			<form id="tdjcxx" method="post">
+				<table id="tdjcxx" width="100%" border="1px" cellpadding="2" cellspacing="0">
+					<tr>
+						<td>计算机编码：</td>
+						<td>5301000000001</td>
+						<td>纳税人名称：</td>
+						<td colspan="5">
+							云南磷化集团
+						</td>
+					</tr>
+					<tr>
+						<td>纳税人识别号：</td>
+						<td>22143243201</td>
+						<td>注册经营地址：</td>
+						<td colspan="5">
+							昆明市晋宁县
+						</td>
+					</tr>
+					<tr>
+						<td>法定代表人名称：</td>
+						<td>XXXX</td>
+						<td>法定代表人联系方式：</td>
+						<td>
+							0871-62344343
+						</td>
+						<td>办税人：</td>
+						<td>
+							XXX
+						</td>
+						<td>办税人联系方式：</td>
+						<td>
+							0871-623443434
+						</td>
+					</tr>
+					<tr>
+						<td>
+							备注
+						</td>
+						<td colspan="7">
+							&nbsp;
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div title="土地承租方信息" data-options="
+				tools:[{
+					handler:function(){
+						$('#tt').datagrid('reload');
+					}
+				}]">
+			<table id="tt" style="width:1200px;height:700px"
+			data-options="singleSelect:true,idField:'itemid'" rownumbers="true"> 
+				<thead>
+					<tr>
+						<th data-options="field:'czfwsh',width:180,align:'right',editor:{type:'text'}">承租方文书号或协议号</th>
+						<th data-options="field:'czfjsjbm',width:120,align:'right',editor:{type:'numberbox',precision:0}">承租方计算机编码</th>
+						<th data-options="field:'czfmc',width:300,align:'center',editor:{type:'text'}">承租方名称</th>
+						<th data-options="field:'czmx',width:80,align:'right',editor:{type:'numberbox',precison:3}">承租面积</th>
+						<th data-options="field:'yzj',width:80,align:'right',editor:{type:'numberbox',precison:2}">月租金</th>
+						<th data-options="field:'czsjq',width:80,align:'right',editor:{type:'datebox'}">承租时间起</th>
+						<th data-options="field:'czsjz',width:80,align:'right',editor:{type:'datebox'}">承租时间止</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div title="减免信息" data-options="
+				tools:[{
+					handler:function(){
+						$('#jm').datagrid('reload');
+					}
+				}]">
+			<table id="jm" style="width:1200px;height:700px"
+			data-options="iconCls:'icon-edit',singleSelect:true,idField:'itemid'" rownumbers="true"> 
+				<thead>
+					<tr>
+						<th data-options="field:'mssz',width:180,align:'right',editor:{type:'text'}">免税税种</th>
+						<th data-options="field:'pzmswh',width:100,align:'center',editor:{type:'text'}">批准免税文号</th>
+						<th data-options="field:'pzmsjg',width:100,align:'center',editor:{type:'text'}">批准免税机关</th>
+						<th data-options="field:'msxz',width:100,align:'center',editor:{type:'text'}">减免性质</th>
+						<th data-options="field:'msmj',width:80,align:'right',editor:{type:'numberbox',precison:3}">免税面积</th>
+						<th data-options="field:'jmyy',width:100,align:'center',editor:{type:'text'}">减免原因</th>
+						<th data-options="field:'msdzcyj',width:100,align:'center',editor:{type:'text'}">减免的政策依据</th>
+						<th data-options="field:'jmsjq',width:80,align:'right',editor:{type:'datebox'}">减免时间起</th>
+						<th data-options="field:'jmsjz',width:80,align:'right',editor:{type:'datebox'}">减免时间止</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+		<div title="土地减少信息" style="padding:10px;">
+			<form id="tdjcxx" method="post">
+				<table id="tdjcxx" width="100%" border="1px" cellpadding="2" cellspacing="0">
+					<tr>
+						<td>减少面积：</td>
+						<td>&nbsp;</td>
+						<td>减少原因：</td>
+						<td>
+							&nbsp;
+						</td>
+						<td>减少时间起：</td>
+						<td>
+							&nbsp;
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div title="在建房产信息" style="padding:10px;">
+			<form id="tdjcxx" method="post">
+				<table id="zjfcxx" width="100%" border="1px" cellpadding="2" cellspacing="0">
+					<tr>
+						<td rowspan="2">预计投资总额：</td>
+						<td>&nbsp;</td>
+						<td>建筑安装工程：</td>
+						<td>
+							&nbsp;</input>
+						</td>
+						<td>实际工程拨付款：</td>
+						<td>
+							&nbsp;</input>
+						</td>
+						<td>拨付时间起：</td>
+						<td>
+							&nbsp;</input>
+						</td>
+					</tr>
+					<tr>
+						<td>应计入房产原值与房屋不可分割的设备：</td>
+						<td>&nbsp;</td>
+						<td>拨付时间止：</td>
+						<td colspan="3">
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>计划开工日期：</td>
+						<td colspan="2">&nbsp;</td>
+						<td>实际开工日期：</td>
+						<td colspan="2">
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>计划竣工日期：</td>
+						<td colspan="2">&nbsp;</td>
+						<td>实际竣工日期：</td>
+						<td colspan="2">
+							&nbsp;
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div title="房产基础信息" style="padding:10px;">
+			<form id="tdjcxx" method="post">
+				<table id="zjfcxx" width="100%" border="1px" cellpadding="2" cellspacing="0">
+					<tr>
+						<td>房产证类型：</td>
+						<td>&nbsp;</td>
+						<td>房产产权证号：</td>
+						<td>
+							&nbsp;
+						</td>
+						<td>发证日期：</td>
+						<td>
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>房产用途：</td>
+						<td>&nbsp;</td>
+						<td>房产来源：</td>
+						<td>
+							&nbsp;
+						</td>
+						<td>投入使用时间：</td>
+						<td>
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="3">房产坐落地：</td>
+						<td>类型：</td>
+						<td colspan="4">
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>所属乡镇：</td>
+						<td colspan="4">
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>详细地址：</td>
+						<td colspan="4">
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td rowspan="3">面积（平方米）</td>
+						<td>房产原值：</td>
+						<td>
+							&nbsp;
+						</td>
+						<td>房产原值：</td>
+						<td>
+							&nbsp;
+						</td>
+						<td>是否单独地下建筑：</td>
+						<td colspan="2">
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>建筑安装成本：</td>
+						<td colspan="4">
+							&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>应计入房产原值与房屋不可分割的设备：</td>
+						<td colspan="4">
+							&nbsp;
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div title="房产承租方信息" data-options="
+				tools:[{
+					handler:function(){
+						$('#fcczfxx').datagrid('reload');
+					}
+				}]">
+			<table id="fcczfxx" style="width:1200px;height:700px"
+			data-options="singleSelect:true,idField:'itemid'" rownumbers="true"> 
+				<thead>
+					<tr>
+						<th data-options="field:'czfwsh',width:180,align:'right',editor:{type:'text'}">承租方文书号或协议号</th>
+						<th data-options="field:'czfjsjbm',width:120,align:'right',editor:{type:'numberbox',precision:0}">承租方计算机编码</th>
+						<th data-options="field:'czfmc',width:300,align:'center',editor:{type:'text'}">承租方名称</th>
+						<th data-options="field:'czmx',width:80,align:'right',editor:{type:'numberbox',precison:3}">承租面积</th>
+						<th data-options="field:'yzj',width:80,align:'right',editor:{type:'numberbox',precison:2}">月租金</th>
+						<th data-options="field:'czsjq',width:80,align:'right',editor:{type:'datebox'}">承租时间起</th>
+						<th data-options="field:'czsjz',width:80,align:'right',editor:{type:'datebox'}">承租时间止</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+  
+</html>  

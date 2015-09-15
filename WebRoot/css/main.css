@@ -1,0 +1,150 @@
+body {
+	width: 949px;
+	height: auto;
+	margin: 0px auto;
+	padding: 0px auto;
+	font-size: 12px;
+	font-family: Tahoma, Geneva, sans-serif;
+	color: #333;
+	text-align:center;	
+	
+}
+div.header
+{
+clear:both;
+}
+div.top1 {
+	height: 16px;
+}
+div.top2 {
+	background-image: url(../images/head/2_1.jpg);
+	background-repeat: repeat-y;
+	height: 10px;
+}
+div.userinfo{
+	text-align:left;
+	padding:0px 0 0 5px;
+	color: #000;
+}
+
+div.footer
+{
+	background-image: url(../images/bot/4_1.jpg);
+	background-repeat: repeat-y;
+	height: 20px;
+	clear: both;
+	border:0px solid #9db3c5;
+}
+div.left
+{
+float:left;
+width:158px;
+margin:2px;
+margin-left:0px;
+padding:0px;
+text-align: left;
+border:1px solid #9db3c5;
+}
+
+div.content
+{
+float:left;
+margin:2px;
+margin-right:0px;
+border:0px solid gray;
+padding-top:0px;
+}
+div.content #contentFrame{ 
+	width:785px;
+	height:480px;
+	border:0px solid #9db3c5;
+}
+
+div.menu{
+	margin-bottom: 2px;
+}
+div.mainmenu{
+	margin:0px;
+	padding:0 2px 0 5px;
+	text-align:left;
+	font-size: 12px;
+	font-weight:bold; 	
+	background-color:#014f9a;
+	line-height:30px;
+	height:30px;
+	color:#fff;
+	border:0px solid #a7d1fd;
+	
+}
+ul{
+	border: 0px solid gray;
+	margin: 0px;
+	padding: 0px;
+}
+li{
+	padding:3px 1px 3px 1px;
+	margin: 0px;
+	list-style: none;
+	font-size:12px;
+	line-height:18px;
+	border: 0px solid red;
+}
+ul li#tip{
+	padding:5px 2px 5px 5px;
+	line-height:22px;
+	border-bottom: 1px solid #9db3c5;
+}
+ul li#ydj3{
+	border-bottom: 1px solid #9db3c5;
+}
+ul li#loginout{
+	padding:5px 2px 5px 5px;
+}
+
+/**
+#sub3 ul li.onchange{
+	padding-left:20px;
+	background: url(../images/main/pencil.gif) no-repeat left 3px;
+}
+#sub3 ul li.finish{
+	padding-left:20px;
+	background: url(../images/main/tick.gif) no-repeat left 3px;
+}
+#sub3 ul li.unfinish{
+	padding-left:20px;
+	background: url(../images/main/cross.gif) no-repeat left 3px;
+}
+
+#main1title.onchange{
+	padding-left:20px;
+	background: url(../images/main/pencil.gif) no-repeat left -2px;
+}
+#main1title.finish{
+	padding-left:20px;
+	background: url(../images/main/tick.gif) no-repeat left -2px;
+}
+#main1title.unfinish{
+	padding-left:20px;
+	background: url(../images/main/cross.gif) no-repeat left -2px;
+}
+a{
+	color: #333; text-decoration:none;
+}
+a:hover {
+	color: #3f419e; text-decoration: none
+}
+a:visited {
+	color: #900b09; text-decoration: none
+}
+a:link {
+	background: none transparent scroll repeat 0% 0%; color: #900b09; text-decoration: underline
+}
+a:visited {
+	background: none transparent scroll repeat 0% 0%; color: #900b09; text-decoration: underline
+}
+a:hover {
+	background: none transparent scroll repeat 0% 0%; color: #ff0000; text-decoration: underline
+}
+a:active {
+	background: none transparent scroll repeat 0% 0%; color: #ff0000; text-decoration: underline
+}*/

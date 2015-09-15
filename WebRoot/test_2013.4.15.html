@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="Modern UI CSS">
+    <meta name="author" content="Sergey Pimenov">
+    <meta name="keywords" content="windows 8, modern style, modern ui, style, modern, css, framework">
+
+    <link href="css/modern.css" rel="stylesheet">
+    <link href="css/modern-responsive.css" rel="stylesheet">
+    <link href="css/droptiles.css" rel="stylesheet">
+	<link href="themes/metroui/easyui.css" rel="stylesheet">
+	<script src="jquery-1.8.0.min.js"></script>
+	<script src="jquery.easyui.min.js"></script>
+    <script src="js/jquery.mousewheel.min.js"></script>
+	<script src="js/dropdown.js"></script>
+    <script src="js/screenboard.js"></script>
+    <script src="js/tile-slider.js"></script>
+    <script src="js/tiles.js"></script>
+    <script src="js/moduleWindow.js"></script>
+
+
+    
+    <title>Metro风格</title>
+
+    <style>
+        body {
+            background-image:url(images/wallpaper.jpg)  
+				
+        }
+		
+    </style>
+
+    <script>
+
+        function Resize(){
+            var tiles_area = 0;
+            $(".tile-group").each(function(){
+                tiles_area += $(this).outerWidth() + 60;
+
+            });
+
+            $(".tiles").css("width", 0 + tiles_area + 20);
+
+            $(".page").css({
+                height: $(document).height() - 120,
+                width: $(document).width()
+            });
+        }
+
+        function AddMouseWheel(){
+            $("body").mousewheel(function(event, delta){
+                var scroll_value = delta * 50;
+                if (jQuery.browser.webkit) {
+                    this.scrollLeft -= scroll_value;
+
+                } else {
+                    document.documentElement.scrollLeft -= scroll_value;
+                }
+                return false;
+            });
+        }
+
+        $(function(){
+				new tiles("hahaId","#mainFuncId","no","bg-color-green","icon","images/Market128.png","哈哈哈");
+				new tiles("hahaId2","#mainFuncId","no","bg-color-orange","icon","images/Mail128.png","ggg","2","bg-color-orange");
+				new tiles("loginId","#mainFuncId","yes","bg-color-blueDark","icon","images/Mail128.png","ggg","3","bg-color-orange","<img src='images/michael.jpg' class='place-left'/><h3 style='margin-bottom: 5px;'>module</h3><p>一个功能.</p><h5>这是一个功能入口</h5>");
+				new tiles("hahaId3","#mainFuncId","no","bg-color-red","icon","images/Music128.png","ggg","4","bg-color-orange");
+				new tiles("hahaId4","#mainFuncId","yes","bg-color-red","image","images/5.jpg","ggg","5","bg-color-orange");
+				new tiles("hahaId5","#mainFuncId","no","bg-color-pink","icon","images/YouTube128.png","ggg","6","bg-color-orange");
+				new tiles("hahaId6","#mainFuncId","no","fg-color-purple","icon","images/Video128.png","ggg","7","bg-color-orange");
+
+
+
+					Resize();
+
+
+				$('#hahaId').click(function(){
+						$('#subFuncId').empty();
+						new tiles("s1","#subFuncId","no","bg-color-pinkDark","icon","images/Mail128.png","列表1"); 
+						new tiles("s2","#subFuncId","no","bg-color-pinkDark","icon","images/Mail128.png","地图应用");  
+						new tiles("s3","#subFuncId","no","bg-color-pinkDark","icon","images/Mail128.png","消息框");  
+						new tiles("s4","#subFuncId","no","bg-color-pinkDark","icon","images/Mail128.png","弹出框");  
+						new tiles("s5","#subFuncId","no","bg-color-pinkDark","icon","images/Mail128.png","表单");  
+						new tiles("s6","#subFuncId","no","bg-color-pinkDark","icon","images/Mail128.png","选项卡");  
+
+							  //location = "http://www.163.com";
+				 });
+
+				$('#hahaId2').click(function(){
+							
+						$('#subFuncId').empty();
+						new tiles("t1","#subFuncId","no","bg-color-blue","icon","images/InternetExplorer128.png","功能1"); 
+						new tiles("t2","#subFuncId","no","bg-color-blue","icon","images/excel2013icon.png","功能2");
+						new tiles("t3","#subFuncId","no","bg-color-blue","icon","images/word2013icon.png","功能3");
+						new tiles("t4","#subFuncId","no","bg-color-blue","icon","images/onenote2013icon.png","功能4");
+					 
+					  
+							  //location = "http://www.163.com";
+				 });
+
+				$("#s1").live("click",function(){
+				 // ui.settings("demo/datagrid/checkbox.html");
+
+					moduleWindow.open({
+						id: 'xxxId1',
+						title: '这是1',
+						width: 800,
+						height: 580,
+						icon:"images/1.ico",
+						minimizable: true,
+						data: {name: 'Tom', age: 18}, //传递给iframe的数据
+						content: 'url:demo/datagrid/checkbox.html',
+						onLoad: function(dialog){
+							if(this.content && this.content.doInit){//判断弹出窗体iframe中的doInit方法是否存在
+								this.content.doInit(dialog);//调用并将参数传入，此处当然也可以传入其他内容
+							}
+						}
+					});
+
+					
+					//$("#box").style.left = $("#xxxId1").offset().left;
+					//alert($("#xxxId1").offset().left);
+
+	
+//	var moduleWindow=$("<div id='tttt'></div>");  
+//	moduleWindow.attr("data-options","minimizable:false");
+//	moduleWindow.attr("closed","true");
+//	moduleWindow.attr("class","easyui-window");
+//	moduleWindow.attr("style","width:600px;height:400px;padding:5px;");
+
+
+//alert($("#win").href);
+//	$("#win").window('open');
+	//alert($("#zx").html());
+//<div id="win" data-options="iconCls:'icon-save',minimizable:false" class="easyui-window" title="My Window" style="width:600px;height:400px;padding:5px;">
+   
+//</div>
+
+
+				});
+				$("#s2").live("click",function(){
+				  //ui.settings("demo/datagrid/custompager.html");
+				//$("#xxxId1").css({position: "absolute", left: "100px", top: "500px"}); 
+					moduleWindow.open({
+						id: 'xxxId2',
+						title: '土地资源地图信息',
+						width: 1100,
+						height: 480,
+						icon:"images/2.ico",
+						minimizable: true,
+						data: {name: 'Tom', age: 18}, //传递给iframe的数据
+						content: 'url:map/basic.html',
+						onLoad: function(dialog){
+							if(this.content && this.content.doInit){//判断弹出窗体iframe中的doInit方法是否存在
+								this.content.doInit(dialog);//调用并将参数传入，此处当然也可以传入其他内容
+							}
+						}
+					});
+						
+
+				});
+				$("#s3").live("click",function(){
+				  //ui.settings("demo/form/basic.html");
+
+					moduleWindow.open({
+						id: 'xxxId3',
+						title: '这是3',
+						width: 800,
+						height: 500,
+						icon:"images/3.ico",
+						minimizable: true,
+						data: {name: 'Tom', age: 18}, //传递给iframe的数据
+						content: 'url:demo/messager/position.html',
+						onLoad: function(dialog){
+							if(this.content && this.content.doInit){//判断弹出窗体iframe中的doInit方法是否存在
+								this.content.doInit(dialog);//调用并将参数传入，此处当然也可以传入其他内容
+							}
+						}
+					});
+
+				});
+				$("#s4").live("click",function(){
+				  //ui.settings("demo/dialog/basic.html");
+					moduleWindow.open({
+						id: 'xxxId4',
+						title: '这是4',
+						width: 800,
+						height: 500,
+						icon:"images/4.ico",
+						minimizable: true,
+						data: {name: 'Tom', age: 18}, //传递给iframe的数据
+						content: 'url:demo/dialog/basic.html',
+						onLoad: function(dialog){
+							if(this.content && this.content.doInit){//判断弹出窗体iframe中的doInit方法是否存在
+								this.content.doInit(dialog);//调用并将参数传入，此处当然也可以传入其他内容
+							}
+						}
+					});
+
+				});
+				$("#s5").live("click",function(){
+				  //ui.settings("demo/messager/position.html");
+					moduleWindow.open({
+						id: 'xxxId5',
+						title: '扩展的窗口',
+						width: 800,
+						height: 500,
+						minimizable: true,
+						data: {name: 'Tom', age: 18}, //传递给iframe的数据
+						content: 'url:demo/form/basic.html',
+						onLoad: function(dialog){
+							if(this.content && this.content.doInit){//判断弹出窗体iframe中的doInit方法是否存在
+								this.content.doInit(dialog);//调用并将参数传入，此处当然也可以传入其他内容
+							}
+						}
+					});
+				});
+				$("#s6").live("click",function(){
+				  //ui.settings("demo/tabs/basic.html");
+					moduleWindow.open({
+						id: 'xxxId6',
+						title: '扩展的窗口',
+						width: 800,
+						height: 500,
+						minimizable: false,
+						data: {name: 'Tom', age: 18}, //传递给iframe的数据
+						content: 'url:demo/tabs/basic.html',
+						onLoad: function(dialog){
+							if(this.content && this.content.doInit){//判断弹出窗体iframe中的doInit方法是否存在
+								this.content.doInit(dialog);//调用并将参数传入，此处当然也可以传入其他内容
+							}
+						}
+					});
+				});
+
+
+				$("#t1").live("click",function(){
+				  //ui.settings("demo/datagrid/checkbox.html");
+        $("#box").animate({opacity: "0.1", left: "+=400"}, 1200) 
+        .animate({opacity: "0.4", top: "-=460", height: "20", width: "20"}, "slow") 
+        .animate({opacity: "1", left: "0", height: "100", width: "100"}, "slow") 
+        .animate({top: "0"}, "fast") 
+        .slideUp() 
+        .slideDown("slow") 
+        return false; 
+
+				});
+				$("#t2").live("click",function(){
+				  ui.settings("demo/tabs/basic.html");
+
+				});
+		  //$("#hahaId").click( function() {
+		//	alert("haha");
+		//  });
+			//alert($("#hahaId").html());
+
+
+
+
+        })
+
+function login(){
+	this.location = "test.html";
+}
+    </script>
+</head>
+<body class="modern-ui" onresize="Resize()">
+
+
+<div class="page secondary fixed-header">
+
+
+    <div class="page-region">
+        <div class="page-region-content tiles">
+            <div class="tile-group" id="mainFuncId">
+
+
+            </div>
+
+
+
+
+            <div class="tile-group tile-drag" style="width: 322px;" id="subFuncId">
+
+
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+<div id="box"> 
+
+</div>  
+
+</body>
+</html>

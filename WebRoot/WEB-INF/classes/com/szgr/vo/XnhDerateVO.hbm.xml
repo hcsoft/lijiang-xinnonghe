@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE hibernate-mapping PUBLIC "hibernate-mapping" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="xnh_derate" name="com.szgr.vo.XnhDerateVO">
+    <id type="java.lang.String" column="serialno" name="serialno" >
+      <generator class="assigned"/>
+    </id>
+    <property not-null = "false"  type="java.lang.String" column="user_id" name="user_id" />
+    <property not-null = "false"  type="timestamp" column="hospital_begindate2" name="hospital_begindate2" />
+    <property not-null = "false"  type="timestamp" column="hospital_enddate" name="hospital_enddate" />
+    <property not-null = "false"  type="java.lang.String" column="diagnose" name="diagnose" />
+    <property not-null = "false"  type="java.lang.String" column="derate_type" name="derate_type" />
+    <property not-null = "false"  type="timestamp" column="derate_date" name="derate_date" />
+    <property not-null = "false"  type="java.math.BigDecimal" column="actual_amount" name="actual_amount" />
+    <property not-null = "false"  type="java.math.BigDecimal" column="derate_amount" name="derate_amount" />
+    <property not-null = "false"  type="java.math.BigDecimal" column="derate_sumamount" name="derate_sumamount" />
+    <property not-null = "false"  type="java.lang.String" column="opt_orgcode" name="opt_orgcode" />
+    <property not-null = "false"  type="java.lang.String" column="opt_empcode" name="opt_empcode" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<base target="_self"/>
+	<title></title>
+
+	
+	
+	<script src="../../js/jquery-1.8.2.min.js"></script>
+	<script src="../../js/jquery.easyui.min.js"></script>
+
+	<script language="javascript" src="../../js/LodopFuncs.js"></script>
+	<object  id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0> 
+	       <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+	</object>
+
+	<script>
+	Date.prototype.format = function(format,now) {
+	    /*
+	     * eg:format="yyyy-MM-dd hh:mm:ss";
+	     */
+	
+	    var d = now ? (new Date(Date.parse(now.replace(/-/g,   "/")))) : this;
+	    var o = {
+	        "M+" : d.getMonth() + 1, // month
+	        "d+" : d.getDate(), // day
+	        "h+" : d.getHours(), // hour
+	        "m+" : d.getMinutes(), // minute
+	        "s+" : d.getSeconds(), // second
+	        "q+" : Math.floor((d.getMonth() + 3) / 3), // quarter
+	         "N+" : ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"][d.getDay()],
+	        "S" : d.getMilliseconds()// millisecond
+	    }
+	
+	    if (/(y+)/.test(format)) {
+	        format = format.replace(RegExp.$1, (d.getFullYear() + "").substr(4
+	                        - RegExp.$1.length));
+	    }
+	
+	    for (var k in o) {
+	        if (new RegExp("(" + k + ")").test(format)) {
+	            format = format.replace(RegExp.$1, RegExp.$1.length == 1
+	                            ? o[k]
+	                            : ("00" + o[k]).substr(("" + o[k]).length));
+	        }
+	    }
+	    return format;
+	}
+	
+	function dateformatter(value,row,index){
+		return new Date(value).format("yyyy-MM-dd");
+	}
+	
+	var LODOP; //声明为全局变量 
+	function CreateOneFormPage(){
+		LODOP=getLodop(document.getElementById('LODOP_OB'),document.getElementById('LODOP_EM'));  
+		LODOP.SET_LICENSES("昆明恒辰科技有限公司","055595969718688748719056235623","","");
+		LODOP.PRINT_INIT("土地使用税、房产税税源核实表");
+		LODOP.SET_PRINT_STYLE("FontSize",18);
+		LODOP.SET_PRINT_STYLE("Bold",1);
+//		alert(document.getElementById("content").innerHTML);
+		LODOP.ADD_PRINT_HTM(0,0,'100%','100%',document.getElementById("content").innerHTML);
+//		LODOP.ADD_PRINT_TABLE(0,0,'100%','100%',document.getElementById("content").innerHTML);
+//		LODOP.ADD_PRINT_URL(0,0,'100%','100%',"file:///D:/Workspaces/jnds-tdgs/WebRoot/tdgs/groundgathercheck/detailprint.html")
+		LODOP.SET_PRINT_PAGESIZE(2,0,0,"");
+//		LODOP.ADD_PRINT_BARCODE(82,947,150,150,"QRCode","5301240002744|晋宁县水利管理服务公司|土地面积:40109.95|免税土地面积:0|应税土地面积:40109.95|房产原值:667261.58|减免房产原值:|应税房产原值: 667,261.58");
+//		LODOP.SET_PRINT_STYLEA(0,"QRCodeVersion",3);
+
+	};
+	function prn1_preview() {	
+		CreateOneFormPage();	
+		LODOP.SET_PREVIEW_WINDOW(1,0,0,0,0,"");	
+		LODOP.SET_SHOW_MODE("LANDSCAPE_DEFROTATED",1);//横向时的正向显示
+		LODOP.PREVIEW();	
+	};
+	function prn1_print() {		
+		CreateOneFormPage();
+		LODOP.PRINT();	
+	};
+	function prn1_printA() {		
+		CreateOneFormPage();
+		LODOP.PRINTA(); 	
+	};
+	
+//	$(function(){
+//		
+//	})
+	</script>
+</head>
+<body>
+<div id="content">
+<table    border="1" cellpadding="0" cellspacing="0"  style="border-collapse:collapse" bordercolor="#000000">
+  <tr>
+    <td>
+    <div align="center">
+        <table  border="0" >
+          <tr>
+            <td   valign="top"> 
+            <div align="center">
+                <table  border="0" width="100%">
+                  <th>
+                  	<td height="21" colspan="14"  valign="middle"  align="center"><strong>土地使用税、房产税税源核实表</strong></td>
+                  </th>
+                  <tr> 
+                    <td colspan="2" height="21" width="89" nowrap> <div align="left" ><font size="2">主管税务机关:</font></div></td>
+                    <td colspan="2" height="21" width="214" > <div align="left" ><font size="2">晋宁县地方税务局二分局</font></div></td>
+                    <td colspan="1" height="21" width="74" > <div align="left" ><font size="2">税收管理员:</font></div></td> 
+                    <td colspan="2" height="21" width="155" > <div align="left" ><font size="2">刘智英</font></div></td> 
+                    <td colspan="1" height="21" width="111" > <div align="left" ><font size="2">制表时间：</font></div></td> 
+                    <td colspan="1" height="21" width="85" > <div align="left" ><font size="2">2013-09-22</font></div></td> 
+                    <td colspan="2" height="21" width="192" > <div align="center" ><font size="2"></font></div></td>
+                    <td colspan="3" height="21" width="179" > <div align="center" ><font size="2">单位：平方米、元</font></div></td>
+                  </tr>
+                </table>
+                <table   width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+                  <tr > 
+                    <td height="75" colspan="2" width="89" valign="middle"  align="center"><font size="2">计算机编码</font></td>
+                    <td height="75" colspan="1" width="149" valign="middle"  align="center"><font size="2">5301240002744</font></td>
+                    <td height="75" colspan="2" width="139" valign="middle"  align="center"><font size="2">纳税人名称</font></td>
+                    <td height="75" colspan="3" width="" valign="middle"  align="center"><font size="2">晋宁县水利管理服务公司</font></td>
+                    <td height="75" colspan="1" width="85" valign="middle"  align="center"><font size="2">注册类型</font></td>
+                    <td height="75" colspan="2" width="192" valign="middle"  align="center"><font size="2">国有地方企业</font></td>
+                    <!--   -->
+                    <td height="75" colspan="1" width="26" rowspan="2" valign="middle" align="center"><font size="2">二<br>维<br>码</font></td>
+                    <td height="75" colspan="2" width="153" rowspan="2" valign="middle"  align="center"><font size="2"></font></td>
+                   
+                  </tr>
+                  <tr  >
+                    <td height="75" colspan="2" width="89" valign="middle"  align="center"><font size="2">所属行业</font></td>
+                    <td height="75" colspan="3" width="288" valign="middle"  align="center"><font size="2">其他水利管理业</font></td>
+                    <td height="75" colspan="1" width="" valign="middle"  align="center"><font size="2">联系人</font></td>
+                    <td height="75" colspan="2" width="" valign="middle"  align="center"><font size="2">徐双琼</font></td>
+                    <td height="75" colspan="1" width="85" valign="middle"  align="center"><font size="2">联系电话</font></td>
+                    <td height="75" colspan="2" width="192" valign="middle"  align="center"><font size="2">7892425</font></td>
+                  </tr>
+				</table>
+				 <!-- -->
+				<table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+				  <tr>
+                  	<td height="21" colspan="14"  valign="middle"  align="center"><strong>土地使用税税源信息</strong></td>
+                  </tr>
+                   <tr>
+                    <td height="21" colspan="1" width="35" valign="middle"  align="center"><font size="2">序号</font></td>
+                  	<td height="21" colspan="1" width="37" valign="middle"  align="center"><font size="2">土地来源</font></td>
+                    <td height="21" colspan="2" width="166" valign="middle"  align="center"><font size="2">土地使用权证号</font></td>
+                    <td height="21" colspan="1" width="65" valign="middle"  align="center"><font size="2">用途</font></td>
+                    <td height="21" colspan="1" width="74" valign="middle"  align="center"><font size="2">所属乡镇(街道办)</font></td>
+                    <td height="21" colspan="2" width="155" valign="middle"  align="center"><font size="2">土地坐落地</font></td>
+                    <td height="21" colspan="1" width="111" valign="middle"  align="center"><font size="2">取得土地时间</font></td>
+                    <td height="21" colspan="1" width="85" valign="middle"  align="center"><font size="2">土地价值</font></td>
+                    <td height="21" colspan="1" width="100" valign="middle"  align="center"><font size="2">土地面积</font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2">免税土地面积</font></td>
+                    <td height="21" colspan="2" width="87" valign="middle"  align="center"><font size="2">应税土地面积</font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2">土地等级</font></td>
+                  </tr>
+                   <tr>
+                    <td height="21" colspan="1" width="35" valign="middle"  align="center"><font size="2">1</font></td>
+                  	<td height="21" colspan="1" width="37" valign="middle"  align="center"><font size="2">划拨</font></td>
+                    <td height="21" colspan="2" width="166" valign="middle"  align="center"><font size="2">晋国用（2006）第1053号</font></td>
+                    <td height="21" colspan="1" width="65" valign="middle"  align="center"><font size="2">自用</font></td>
+                    <td height="21" colspan="1" width="74" valign="middle"  align="center"><font size="2">上蒜镇</font></td>
+                    <td height="21" colspan="2" width="155" valign="middle"  align="center"><font size="2">上蒜乡牛恋村民委员会小渔村</font></td>
+                    <td height="21" colspan="1" width="111" valign="middle"  align="center"><font size="2">2006-10-25</font></td>
+                    <td height="21" colspan="1" width="85" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="1" width="100" valign="middle"  align="center"><font size="2">13550.22</font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2">13550.22</font></td>
+                    <td height="21" colspan="2" width="87" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2">二等</font></td>
+                  </tr>
+                   <tr>
+                    <td height="21" colspan="1" width="35" valign="middle"  align="center"><font size="2">2</font></td>
+                  	<td height="21" colspan="1" width="37" valign="middle"  align="center"><font size="2">划拨</font></td>
+                    <td height="21" colspan="2" width="166" valign="middle"  align="center"><font size="2">晋国用（2006）第1052号</font></td>
+                    <td height="21" colspan="1" width="65" valign="middle"  align="center"><font size="2">自用</font></td>
+                    <td height="21" colspan="1" width="74" valign="middle"  align="center"><font size="2">上蒜镇</font></td>
+                    <td height="21" colspan="2" width="155" valign="middle"  align="center"><font size="2">晋宁县上蒜乡洗澡塘村民委员会洗澡塘村</font></td>
+                    <td height="21" colspan="1" width="111" valign="middle"  align="center"><font size="2">2006-10-26</font></td>
+                    <td height="21" colspan="1" width="85" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="1" width="100" valign="middle"  align="center"><font size="2">12258.51</font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2">12258.51</font></td>
+                    <td height="21" colspan="2" width="87" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2">二等</font></td>
+                  </tr>
+                  <tr>
+                  	<td height="21" colspan="9" width="643" valign="middle"  align="center"><font size="2">合计</font></td>
+                    <td height="21" colspan="1" width="85" valign="middle"  align="center"><font size="2">0.00</font></td>
+                    <td height="21" colspan="1" width="100" valign="middle"  align="center"><font size="2">25808.73</font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2">25808.73</font></td>
+                    <td height="21" colspan="2" width="97" valign="middle"  align="center"><font size="2">0.00</font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2"></font></td>
+                  </tr>
+				</table>
+				<table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+				   <tr>
+                  		<td height="21" colspan="14"  valign="middle"  align="center"><strong>房产税税源信息</strong></td>
+                   </tr>
+                   <tr>
+                    <td height="21" colspan="1" width="35" rowspan="2" valign="middle"  align="center"><font size="2">序号</font></td>
+                  	<td height="21" colspan="1" width="37" rowspan="2" valign="middle"  align="center"><font size="2">房产来源</font></td>
+                    <td height="21" colspan="2" width="166" rowspan="2" valign="middle"  align="center"><font size="2">房屋产权证号</font></td>
+                    <td height="21" colspan="1" width="65" rowspan="2" valign="middle"  align="center"><font size="2">用途</font></td>
+                    <td height="21" colspan="1" width="74" rowspan="2" valign="middle"  align="center"><font size="2">所属乡镇(街道办)</font></td>
+                    <td height="21" colspan="2" width="155" rowspan="2" valign="middle"  align="center"><font size="2">房产坐落地</font></td>
+                    <td height="21" colspan="1" width="111" rowspan="2" valign="middle"  align="center"><font size="2">投入使用时间</font></td>
+                    <td height="21" colspan="1" width="85" rowspan="2" valign="middle"  align="center"><font size="2">建筑面积</font></td>
+                    <td height="21" colspan="2" width="192" rowspan="1" valign="middle"  align="center"><font size="2">房产原值</font></td>
+                    <td height="21" colspan="2" width="87" rowspan="2" valign="middle"  align="center"><font size="2">减免房产原值</font></td>
+                    <td height="21" colspan="1" width="92" rowspan="2" valign="middle"  align="center"><font size="2">应税房产原值</font></td>
+                  </tr>
+                  <tr>
+                  	<td height="21" colspan="1" width="100" valign="middle"  align="center"><font size="2">房产原值</font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2">其中:土地价值</font></td>
+                  </tr>
+                   <tr>
+                    <td height="21" colspan="1" width="35" valign="middle"  align="center"><font size="2">1</font></td>
+                  	<td height="21" colspan="1" width="37" valign="middle"  align="center"><font size="2">自建</font></td>
+                    <td height="21" colspan="2" width="166" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="1" width="65" valign="middle"  align="center"><font size="2">其他用房</font></td>
+                    <td height="21" colspan="1" width="74" valign="middle"  align="center"><font size="2">昆阳街道办事处</font></td>
+                    <td height="21" colspan="2" width="155" valign="middle"  align="center"><font size="2">宝峰镇清水河村民委员会清水河村</font></td>
+                    <td height="21" colspan="1" width="111" valign="middle"  align="center"><font size="2">1989-05-30</font></td>
+                    <td height="21" colspan="1" width="85" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="1" width="100" valign="middle"  align="center"><font size="2">333630.79</font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="2" width="87" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2">333630.79</font></td>
+                  </tr>
+                   <tr>
+                    <td height="21" colspan="1" width="35" valign="middle"  align="center"><font size="2">2</font></td>
+                  	<td height="21" colspan="1" width="37" valign="middle"  align="center"><font size="2">自建</font></td>
+                    <td height="21" colspan="2" width="166" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="1" width="65" valign="middle"  align="center"><font size="2">其他用房</font></td>
+                    <td height="21" colspan="1" width="74" valign="middle"  align="center"><font size="2">昆阳街道办事处</font></td>
+                    <td height="21" colspan="2" width="155" valign="middle"  align="center"><font size="2">宝峰镇清水河村民委员会清水河村</font></td>
+                    <td height="21" colspan="1" width="111" valign="middle"  align="center"><font size="2">1990-06-30</font></td>
+                    <td height="21" colspan="1" width="85" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="1" width="100" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="2" width="87" valign="middle"  align="center"><font size="2"></font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2"></font></td>
+                  </tr>
+                   <tr>
+                  	<td height="21" colspan="9" width="643" valign="middle"  align="center"><font size="2">合计</font></td>
+                    <td height="21" colspan="1" width="85" valign="middle"  align="center"><font size="2">0.00</font></td>
+                    <td height="21" colspan="1" width="100" valign="middle"  align="center"><font size="2">333630.79</font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2">0.00</font></td>
+                    <td height="21" colspan="2" width="87" valign="middle"  align="center"><font size="2">0.00</font></td>
+                    <td height="21" colspan="1" width="92" valign="middle"  align="center"><font size="2">333630.79</font></td>
+                  </tr>
+				</table>
+				
+				<table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#000000">
+                   <tr>
+                  	<td height="21" colspan="7" width="532" valign="top"  align="left">
+                  		<font size="2">纳税人声明：此核实表所填列的土地、房产信息，是真实、完整的，如有虚假，愿承担相应的法律责任。
+                  		<br><br>
+                  		法定代表人（签字）：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 年&nbsp;&nbsp; 月 &nbsp;&nbsp; 日
+                  		<br>
+                  		纳税人公章：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经办人：
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;确认日期：  年&nbsp;&nbsp; 月&nbsp;&nbsp; 日
+                  		</font>
+                  	</td>
+                    <td height="21" colspan="3" width="296" valign="top"  align="left"><font size="2">主管税务机关的核实意见：
+                    	<br><br><br>
+                    	税收管员：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分局负责人：
+                    	<br>
+                    	年&nbsp;&nbsp; 月&nbsp;&nbsp; 日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp; 月&nbsp;&nbsp; 日	
+                    </font></td>
+                    <td height="21" colspan="4" width="271" valign="middle"  align="left"><font size="2">审核小组意见:
+                    	<br><br><br>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;审核人员签字:
+                    	<br>
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;月&nbsp;&nbsp;日	
+                    </font></td>
+                  
+				</table>
+				
+				 <table border="0" width="100%">
+                  <tr> 
+                    <td colspan="14" height="21" > 
+                    <div align="left" ><font size="2">注：本核实表一式二份，纳税人和主管税务机关各一份。</font></div></td>
+                  </tr>
+                </table>
+               </div>
+			</td>
+          </tr>
+        </table>
+     </div>
+     </td>
+  </tr>
+</table>
+</div>	
+<table width="1099">
+<tr>
+  	<td height="24" colspan="10" class="TitTab1">
+		<div align="center">
+			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-viewdetail'" onclick="prn1_preview()">打印预览</a>
+			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-print'" onclick="prn1_printA()">打印</a>
+	  	</div>
+	</td>
+</tr>
+</table>	
+</body>
+</html>

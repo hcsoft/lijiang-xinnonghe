@@ -1,0 +1,491 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<link rel="stylesheet" type="text/css" href="../themes/sunny/easyui.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<link rel="stylesheet" type="text/css" href="../themes/icon.css">
+<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../js/datagrid-groupview.js"></script>  
+<script src="../js/moduleWindow.js"></script>
+
+<title>Hello, World</title>  
+<style type="text/css">  
+html{height:100%}  
+body{height:100%;margin:0px;padding:0px}  
+#container{height:100%}  
+a.theforever_knight1:visited {color:orange;}
+</style>  
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=10fd14046e11c2285e97009ff7cc6a0f"></script>
+
+<script type="text/javascript">
+
+function gotoDetail1(){
+
+							moduleWindow.open({
+							id: "moduleTTT1",
+							title: "税种税收情况",
+							width: 1000,
+							height: 580,
+							icon: "",
+							minimizable: false,
+							//data: {name: 'Tom', age: 18}, //传递给iframe的数据
+							content: "url:D:\\projects\\szgr\\WebRoot\\map\\datagrid1.html",
+							onLoad: function(dialog){
+								if(this.content && this.content.doInit){//判断弹出窗体iframe中的doInit方法是否存在
+									this.content.doInit(dialog);//调用并将参数传入，此处当然也可以传入其他内容
+								}
+							}
+						});
+
+}
+
+
+function gotoDetail2(){
+
+							moduleWindow.open({
+							id: "moduleTTT2",
+							title: "纳税人税收情况",
+							width: 1000,
+							height: 580,
+							icon: "",
+							minimizable: false,
+							//data: {name: 'Tom', age: 18}, //传递给iframe的数据
+							content: "url:D:\\projects\\szgr\\WebRoot\\map\\datagrid2.html",
+							onLoad: function(dialog){
+								if(this.content && this.content.doInit){//判断弹出窗体iframe中的doInit方法是否存在
+									this.content.doInit(dialog);//调用并将参数传入，此处当然也可以传入其他内容
+								}
+							}
+						});
+
+}
+
+function gotoDetail(){
+
+							moduleWindow.open({
+							id: "moduleTTT",
+							title: "土地明细信息",
+							width: 1000,
+							height: 580,
+							icon: "",
+							minimizable: false,
+							//data: {name: 'Tom', age: 18}, //传递给iframe的数据
+							content: "url:D:\\projects\\szgr\\WebRoot\\map\\cjb-2.html",
+							onLoad: function(dialog){
+								if(this.content && this.content.doInit){//判断弹出窗体iframe中的doInit方法是否存在
+									this.content.doInit(dialog);//调用并将参数传入，此处当然也可以传入其他内容
+								}
+							}
+						});
+
+}
+
+
+$(function(){
+
+
+
+
+		$('#title_L_001').live("click",function(){
+
+				var map = new BMap.Map("container");  
+				map.addControl(new BMap.NavigationControl()); 
+				map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]}));     //2D图，卫星图
+				map.addControl(new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_RIGHT})); 
+				map.setCurrentCity("晋宁");   //由于有3D图，需要设置城市哦
+				var polyline1 = new BMap.Polygon([    
+					new BMap.Point(102.759284,24.71033),
+					new BMap.Point(102.76153,24.710494),
+					new BMap.Point(102.763506,24.71056),
+					new BMap.Point(102.76347,24.708738),
+					new BMap.Point(102.763326,24.706867),
+					new BMap.Point(102.763147,24.705373),
+					new BMap.Point(102.76144,24.705849),
+					new BMap.Point(102.760488,24.705964),
+					new BMap.Point(102.759733,24.706309),
+					new BMap.Point(102.759499,24.708721),
+					new BMap.Point(102.75932,24.710281)
+				 ],    
+				 {strokeColor:"blue", strokeWeight:6, strokeOpacity:0.5,fillColor:"green",fillOpacity:0.4}    
+				);    
+				polyline1.addEventListener("mouseover", function(){
+				  polyline1.setFillOpacity("0.8")
+				});
+				polyline1.addEventListener("mouseout", function(){
+				  polyline1.setFillOpacity("0.4")
+				});
+
+				map.addOverlay(polyline1); 
+
+				var point = new BMap.Point(102.761853,24.708377);  
+				var marker = new BMap.Marker(point);        // 创建标注    
+				//
+				map.addOverlay(marker);
+				map.centerAndZoom(point, 17); 
+				map.panTo(point);
+
+				var sContent =
+				"<h4 style='margin:0 0 5px 0;padding:0.2em 0'>晋宁县xx地块</h4>" + 
+				"<div><a href='javascript:gotoDetail1()' class='easyui-linkbutton' data-options='iconCls:icon-add'>税种税收情况</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='javascript:gotoDetail2()' class='easyui-linkbutton' data-options='iconCls:icon-add'>纳税人税收情况</a></div><br>" + 
+
+				"<img style='float:right;margin:4px' id='imgDemo' src='4100964_154455301237_2.jpg' width='500' height='174' title='晋宁县xx地块'/>" + 
+
+
+				"<table>" + 
+					"<tr><td>" +
+
+						"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>" +
+						"<table>" +
+						"<tr><td align=right>所有方名称&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b><a href='javascript:gotoDetail()' class='theforever_knight1'>晋宁县磷化集团</a></b></font></td></tr>" + 
+						"<tr><td align=right>土地来源&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>政府出让</b></font></td></tr>" + 
+						"<tr><td align=right>土地面积&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>12000平方米</b></font></td></tr>" + 
+						"<tr><td align=right>房屋建筑面积&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>10000</b></font></td></tr>" + 
+						"<tr><td align=right>使用年限&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>2010-01-01至2030-01-01</b></font></td></tr>" + 
+						"<tr><td align=right>耕占税应缴信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>单价:26&nbsp;&nbsp;&nbsp;&nbsp;面积:1000&nbsp;&nbsp;&nbsp;&nbsp;税额:26000&nbsp;&nbsp;&nbsp;&nbsp;已缴清:&nbsp;&nbsp;&nbsp;<input type='checkbox' checked/></b></font></td></tr>" + 
+						"<tr><td align=right>土地使用税应缴信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>单价:3&nbsp;&nbsp;&nbsp;&nbsp;面积:2000&nbsp;&nbsp;&nbsp;&nbsp;税额:6000&nbsp;&nbsp;&nbsp;&nbsp;已缴清:&nbsp;&nbsp;&nbsp;<input type='checkbox'/></b></font></td></tr>" + 
+						"<tr><td align=right>房产税应缴信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>原值:500000&nbsp;&nbsp;&nbsp;&nbsp;税率:0.12&nbsp;&nbsp;&nbsp;&nbsp;税额:42000&nbsp;&nbsp;&nbsp;&nbsp;已缴清:&nbsp;&nbsp;&nbsp;<input type='checkbox'/></b></font></td></tr>" + 
+						"<tr><td align=right>其他税款总额信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>单价:26&nbsp;&nbsp;&nbsp;&nbsp;面积:1000&nbsp;&nbsp;&nbsp;&nbsp;税额:26000&nbsp;&nbsp;&nbsp;&nbsp;已缴清:&nbsp;&nbsp;&nbsp;<input type='checkbox' checked/></b></font></td></tr>" + 
+						"<tr><td align=right>其他税款总额信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>单价:26&nbsp;&nbsp;&nbsp;&nbsp;面积:1000&nbsp;&nbsp;&nbsp;&nbsp;税额:26000&nbsp;&nbsp;&nbsp;&nbsp;已缴清:&nbsp;&nbsp;&nbsp;<input type='checkbox' checked/></b></font></td></tr>" + 
+
+						"</table></p>" + 
+
+					"</td>" +
+					
+				"</tr>" +
+				"</table>" +
+
+				"</div>";
+				var infoWindow = new BMap.InfoWindow(sContent); 
+				marker.addEventListener("click", function(){          
+				   this.openInfoWindow(infoWindow);
+				   //图片加载完毕重绘infowindow
+				   document.getElementById('imgDemo').onload = function (){
+					   infoWindow.redraw();
+				   }
+				});
+
+		});
+		$('#title_L_002').live("click",function(){
+			
+				var map = new BMap.Map("container");  
+				map.addControl(new BMap.NavigationControl()); 
+				map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]}));     //2D图，卫星图
+				map.addControl(new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_RIGHT})); 
+				map.setCurrentCity("晋宁");   //由于有3D图，需要设置城市哦
+				var polyline2 = new BMap.Polygon([    
+					new BMap.Point(102.754676,24.712242),
+					new BMap.Point(102.755313,24.712504),
+					new BMap.Point(102.756445,24.71234),
+					new BMap.Point(102.757523,24.712299),
+					new BMap.Point(102.757667,24.711553),
+					new BMap.Point(102.756445,24.711438),
+					new BMap.Point(102.754891,24.711298),
+					new BMap.Point(102.754711,24.712209),
+					new BMap.Point(102.754676,24.712267)
+				 ],    
+				 {strokeColor:"blue", strokeWeight:6, strokeOpacity:0.5,fillColor:"green",fillOpacity:0.4}    
+				);    
+				polyline2.addEventListener("mouseover", function(){
+				  polyline2.setFillOpacity("0.8")
+				});
+				polyline2.addEventListener("mouseout", function(){
+				  polyline2.setFillOpacity("0.4")
+				});
+
+				map.addOverlay(polyline2);    
+				var point = new BMap.Point(102.756158,24.711979);  
+				var marker = new BMap.Marker(point);        // 创建标注    
+				
+				map.addOverlay(marker);
+				map.centerAndZoom(point, 17); 
+				map.panTo(point);
+
+
+		});
+		$('#landId').datagrid( {
+
+			  onClickRow:function(rowIndex,rowData){
+
+				if(rowData.fcid == "F_001"){
+				
+					var map = new BMap.Map("container");  
+					map.addControl(new BMap.NavigationControl()); 
+					map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]}));     //2D图，卫星图
+					map.addControl(new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_RIGHT})); 
+					map.setCurrentCity("晋宁");   //由于有3D图，需要设置城市哦
+					var polyline3 = new BMap.Polygon([    
+						new BMap.Point(102.759625,24.708689),
+						new BMap.Point(102.761386,24.708803),
+						new BMap.Point(102.761386,24.707458),
+						new BMap.Point(102.759733,24.707425),
+						new BMap.Point(102.759589,24.708639)
+					 ],    
+					 {strokeColor:"red", strokeWeight:6, strokeOpacity:0.5,fillColor:"red",fillOpacity:0.4}    
+					);    
+					polyline3.addEventListener("mouseover", function(){
+					  polyline3.setFillOpacity("0.8")
+					});
+					polyline3.addEventListener("mouseout", function(){
+					  polyline3.setFillOpacity("0.4")
+					});
+
+					map.addOverlay(polyline3);   
+					var point = new BMap.Point(102.76047,24.708081);  
+					var marker = new BMap.Marker(point);        // 创建标注    
+					
+					map.addOverlay(marker);
+					map.centerAndZoom(point, 17); 
+					map.panTo(point);
+					var sContent =
+					"<h4 style='margin:0 0 5px 0;padding:0.2em 0'>晋宁县磷化集团职工医院</h4>" + 
+					"<img style='float:right;margin:4px' id='imgDemo' src='01300000057455119927737139802.jpg' width='209' height='124' title='晋宁县磷化集团职工医院'/>" + 
+					"<p style='margin:0;line-height:1.5;font-size:14px;text-indent:2em'>晋宁县磷化集团职工医院<br>位于昆明市晋宁县..................<br>..................</p><br><br><br><br><br><br>" + 
+
+					"<table style='width:500px'>" + 
+						"<tr><td>" +
+
+							"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>" +
+							"<table>" +
+							"<tr><td align=right>使用方名称&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b><a href='javascript:gotoDetail()' class='theforever_knight1'>晋宁县磷化集团职工医院</a></b></font></td></tr>" + 
+							"<tr><td align=right>房产来源&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>自用</b></font></td></tr>" + 
+							"<tr><td align=right>所有方信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>晋宁县磷化集团</b></font></td></tr>" + 
+							"<tr><td align=right>房屋建筑面积&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>10000</b></font></td></tr>" + 
+							"<tr><td align=right>使用面积&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>10000</b></font></td></tr>" + 
+							"<tr><td align=right>土地使用税应缴信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>单价:3&nbsp;&nbsp;&nbsp;&nbsp;面积:2000&nbsp;&nbsp;&nbsp;&nbsp;税额:6000&nbsp;&nbsp;&nbsp;&nbsp;已缴清:&nbsp;&nbsp;&nbsp;<input type='checkbox'/></b></font></td></tr>" + 
+							"<tr><td align=right>房产税应缴信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>原值:500000&nbsp;&nbsp;&nbsp;&nbsp;税率:0.12&nbsp;&nbsp;&nbsp;&nbsp;税额:42000&nbsp;&nbsp;&nbsp;&nbsp;已缴清:&nbsp;&nbsp;&nbsp;<input type='checkbox'/></b></font></td></tr>" + 
+							"<tr><td align=right>其他税款总额信息&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td><font color='orange'><b>单价:26&nbsp;&nbsp;&nbsp;&nbsp;面积:1000&nbsp;&nbsp;&nbsp;&nbsp;税额:26000&nbsp;&nbsp;&nbsp;&nbsp;已缴清:&nbsp;&nbsp;&nbsp;<input type='checkbox' checked/></b></font></td></tr>" + 
+							"</table></p>" + 
+
+						"</td>" +
+						
+					"</tr>" +
+					"</table>" +
+
+					"</div>";
+					var infoWindow = new BMap.InfoWindow(sContent); 
+					marker.addEventListener("click", function(){          
+					   this.openInfoWindow(infoWindow);
+					   //图片加载完毕重绘infowindow
+					   document.getElementById('imgDemo').onload = function (){
+						   infoWindow.redraw();
+					   }
+					});
+				}
+
+				if(rowData.fcid == "F_002"){
+				//alert(rowData.fcid);
+					var map = new BMap.Map("container");  
+					map.addControl(new BMap.NavigationControl()); 
+					map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]}));     //2D图，卫星图
+					map.addControl(new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_RIGHT})); 
+					map.setCurrentCity("晋宁");   //由于有3D图，需要设置城市哦
+					var polyline = new BMap.Polyline([    
+						new BMap.Point(102.761422,24.710412),
+						new BMap.Point(102.76338,24.710494),
+						new BMap.Point(102.763308,24.70882),
+						new BMap.Point(102.76135,24.708853),
+						new BMap.Point(102.761476,24.71033)
+					 ],    
+					 {strokeColor:"red", strokeWeight:6, strokeOpacity:0.5}    
+					);    
+					map.addOverlay(polyline);    
+					var point = new BMap.Point(102.762464,24.709624);
+					var marker = new BMap.Marker(point);        // 创建标注    
+					
+					map.addOverlay(marker);
+					map.centerAndZoom(point, 17); 
+					map.panTo(point);
+					var sContent =
+					"<h4 style='margin:0 0 5px 0;padding:0.2em 0'>和煦阳光</h4>" + 
+					"<img style='float:right;margin:4px' id='imgDemo' src='jingtong.jpg' width='139' height='104' title='和煦阳光'/>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>和煦阳光小区位于昆明市晋宁县.........</p><br><br><br><br><br><br>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>房产用途:住宅</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>投入使用时间:2011-02-03</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>详细地址:xxxxxxxxx</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>所属乡镇:xxxxxxxxxx</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>房产建筑面积:xxxxxxxxx</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>房产原值:xxxxxxxxxx</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>建筑安装成本:xxxxxxxxx</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>是否单独地下建筑:工业</p>" + 
+					"</div>";
+					var infoWindow = new BMap.InfoWindow(sContent); 
+					marker.addEventListener("click", function(){          
+					   this.openInfoWindow(infoWindow);
+					   //图片加载完毕重绘infowindow
+					   document.getElementById('imgDemo').onload = function (){
+						   infoWindow.redraw();
+					   }
+					});
+
+				}
+				if(rowData.fcid == "F_003"){
+				//alert(rowData.fcid);
+					var map = new BMap.Map("container");  
+					map.addControl(new BMap.NavigationControl()); 
+					map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]}));     //2D图，卫星图
+					map.addControl(new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_RIGHT})); 
+					map.setCurrentCity("晋宁");   //由于有3D图，需要设置城市哦
+					var polyline = new BMap.Polyline([    
+						new BMap.Point(102.759392,24.710264),
+						new BMap.Point(102.761404,24.710412),
+						new BMap.Point(102.761386,24.70882),
+						new BMap.Point(102.759589,24.708705),
+						new BMap.Point(102.759338,24.710264)
+					 ],    
+					 {strokeColor:"red", strokeWeight:6, strokeOpacity:0.5}    
+					);    
+					map.addOverlay(polyline);    
+					var point = new BMap.Point(102.760506,24.709509);
+					var marker = new BMap.Marker(point);        // 创建标注   
+					
+					map.addOverlay(marker);
+					map.centerAndZoom(point, 17); 
+					map.panTo(point);
+					var sContent =
+					"<h4 style='margin:0 0 5px 0;padding:0.2em 0'>迎新小区</h4>" + 
+					"<img style='float:right;margin:4px' id='imgDemo' src='time.jpg' width='139' height='104' title='迎新小区'/>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>迎新小区小区位于昆明市晋宁县.........</p><br><br><br><br><br><br>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>房产用途:住宅</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>投入使用时间:2011-02-03</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>详细地址:xxxxxxxxx</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>所属乡镇:xxxxxxxxxx</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>房产建筑面积:xxxxxxxxx</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>房产原值:xxxxxxxxxx</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>建筑安装成本:xxxxxxxxx</p>" + 
+					"<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>是否单独地下建筑:工业</p>" + 
+					"</div>";
+					var infoWindow = new BMap.InfoWindow(sContent); 
+					marker.addEventListener("click", function(){          
+					   this.openInfoWindow(infoWindow);
+					   //图片加载完毕重绘infowindow
+					   document.getElementById('imgDemo').onload = function (){
+						   infoWindow.redraw();
+					   }
+					});
+				}
+				if(rowData.fcid == "F_004"){
+				//alert(rowData.fcid);
+					var map = new BMap.Map("container");  
+					map.addControl(new BMap.NavigationControl()); 
+					map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]}));     //2D图，卫星图
+					map.addControl(new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_RIGHT})); 
+					map.setCurrentCity("晋宁");   //由于有3D图，需要设置城市哦
+					var polyline = new BMap.Polyline([    
+						new BMap.Point(102.756427,24.712324),
+						new BMap.Point(102.757065,24.712267),
+						new BMap.Point(102.757568,24.712291),
+						new BMap.Point(102.75764,24.711881),
+						new BMap.Point(102.757667,24.711569),
+						new BMap.Point(102.756445,24.711454),
+						new BMap.Point(102.756409,24.712332)
+					 ],    
+					 {strokeColor:"red", strokeWeight:6, strokeOpacity:0.5}    
+					);    
+					map.addOverlay(polyline);    
+					var point = new BMap.Point(102.757029,24.711905);
+					var marker = new BMap.Marker(point);        // 创建标注   
+					
+					map.addOverlay(marker);
+					map.centerAndZoom(point, 17); 
+					map.panTo(point);
+				}
+				if(rowData.fcid == "F_005"){
+				//alert(rowData.fcid);
+					var map = new BMap.Map("container");  
+					map.addControl(new BMap.NavigationControl()); 
+					map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]}));     //2D图，卫星图
+					map.addControl(new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_RIGHT})); 
+					map.setCurrentCity("晋宁");   //由于有3D图，需要设置城市哦
+					var polyline = new BMap.Polyline([    
+						new BMap.Point(102.754631,24.712201),
+						new BMap.Point(102.755313,24.712496),
+						new BMap.Point(102.756445,24.712349),
+						new BMap.Point(102.756454,24.711429),
+						new BMap.Point(102.754918,24.711274),
+						new BMap.Point(102.754685,24.712176),
+						new BMap.Point(102.754631,24.712201)
+					 ],    
+					 {strokeColor:"red", strokeWeight:6, strokeOpacity:0.5}    
+					);    
+					map.addOverlay(polyline);    
+					var point = new BMap.Point(102.755628,24.711856);
+					var marker = new BMap.Marker(point);        // 创建标注   
+					
+					map.addOverlay(marker);
+					map.centerAndZoom(point, 17); 
+					map.panTo(point);
+				}
+
+				//alert(rowData.landid);
+			  },
+			  onDblClickRow :function(rowIndex,rowData){
+			  // alert("222");
+			  } 
+			  
+			  });	
+	}
+)
+</script>
+
+</head>  
+   
+<body>  
+	<div class="easyui-layout" style="width:1300px;height:600px;">
+		<div data-options="region:'west',split:true" title="土地信息" style="width:350px;">
+	
+			
+			<table id="landId" class="easyui-datagrid"
+					data-options="  
+						url:'datagrid_data1.json',
+						singleSelect:true,  
+						collapsible:true,  
+						rownumbers:true,  
+						fitColumns:true,  
+						view:groupview,  
+						groupField:'landid',  
+						groupFormatter:function(value,rows){  
+							return '<div id=title_' + value + '><font color=orange>编号:' + rows[0].landid + '&nbsp;&nbsp;&nbsp;&nbsp;地址:' + rows[0].landposition + '&nbsp;&nbsp;&nbsp;&nbsp;获取时间:' + rows[0].landdate + '</font></div>';  
+						}  
+					">  
+				<thead>  
+					<tr>  
+						<th data-options="field:'fcid',width:80">房产编号</th>  
+						<th data-options="field:'fcposition',width:100">房产座落位置</th>  
+						<th data-options="field:'fcdate',width:80,align:'right'">投入使用时间</th>  
+					</tr>  
+				</thead>  
+			</table>  
+			
+			
+		</div>
+
+		<div data-options="region:'center',title:'土地位置',iconCls:'icon-ok'" style="width:900px;">
+			<div id="container"></div>
+		</div>
+</div>
+<script type="text/javascript"> 
+
+
+
+
+var map = new BMap.Map("container");    
+var point = new BMap.Point(102.75393,24.712152);    
+map.centerAndZoom(point, 17);  // 编写自定义函数，创建标注   
+map.addControl(new BMap.NavigationControl()); 
+
+map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]}));     //2D图，卫星图
+map.addControl(new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_RIGHT})); 
+map.setCurrentCity("晋宁");   //由于有3D图，需要设置城市哦
+
+	//var point = new BMap.Point(102.58, 24.68);  // 创建点坐标  
+
+
+
+
+
+</script>  
+</body>  
+</html>  

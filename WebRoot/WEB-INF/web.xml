@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<!-- Spring Config Location -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+        	/WEB-INF/classes/spring.xml,
+        	/WEB-INF/applicationContext-security.xml
+        </param-value>
+	</context-param>
+
+
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>
+        	/WEB-INF/classes/log4j.properties
+        </param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value>
+        	6000
+        </param-value>
+	</context-param>
+
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<listener> 
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class> 
+	</listener> 
+
+	<listener> 
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class> 
+	</listener> 
+
+<!--
+	<listener>
+		<listener-class>com.szgr.framework.cache.listener.CacheInitListener</listener-class>
+	</listener>
+-->
+	<servlet>
+		<servlet-name>jquery</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>jquery</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+    <servlet>
+        <description/>
+        <display-name>UploadServlet</display-name>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>com.szgr.common.upload.UploadServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/UploadServlet</url-pattern>
+    </servlet-mapping>	
+	
+	<servlet>
+        <description/>
+        <display-name>UploadServletUtil</display-name>
+        <servlet-name>UploadServletUtil</servlet-name>
+        <servlet-class>com.szgr.common.upload.UploadServletUtil</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UploadServletUtil</servlet-name>
+        <url-pattern>/UploadServletUtil</url-pattern>
+    </servlet-mapping>
+	
+    <servlet>
+        <display-name>TreeServlet</display-name>
+        <servlet-name>TreeServlet</servlet-name>
+        <servlet-class>com.szgr.tdgs.map.relation.TreeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TreeServlet</servlet-name>
+        <url-pattern>/TreeServlet</url-pattern>
+    </servlet-mapping>	
+
+
+    <servlet>
+        <display-name>PositionTreeServlet</display-name>
+        <servlet-name>PositionTreeServlet</servlet-name>
+        <servlet-class>com.szgr.tdgs.map.PositionTreeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PositionTreeServlet</servlet-name>
+        <url-pattern>/PositionTreeServlet</url-pattern>
+    </servlet-mapping>	
+
+	<welcome-file-list>
+		<welcome-file>login/login.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>

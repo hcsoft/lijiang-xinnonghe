@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="css/modern.css" rel="stylesheet">
+    <link href="css/modern-responsive.css" rel="stylesheet">
+    <link href="css/droptiles.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="themes/sunny/easyui.css">
+	<link rel="stylesheet" type="text/css" href="themes/icon.css">
+	<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script src="js/tiles.js"></script>
+    <script src="js/moduleWindow.js"></script>
+	<script src="js/menus.js"></script>
+
+
+    
+    <title>土地管税信息系统</title>
+
+    <style>
+        body {
+            background-image:url(images/InBloom.jpg)  
+        }
+
+		div[data-liffect="zoomIn"] > div {
+			opacity: 0;
+			position: relative;
+			animation: zoomIn 1300ms ease both;
+			animation-play-state: paused;
+		}
+
+		div[data-liffect="zoomIn"].play > div {
+			animation-play-state: running;
+		}
+
+
+		@keyframes zoomIn {
+			0% { opacity: 0; transform: scale(1.8); }
+			100% { opacity: 1; transform: scale(1); }
+		}
+    </style>
+
+    <script>
+
+$(function(){
+
+		var agentScreen = [{"scWidth":"1366","scHeight":"768","uiReigon1Width":"802px","uiReigon2Width":"362px","tileSize":"100"},{"scWidth":"1360","scHeight":"768","uiReigon1Width":"802px","uiReigon2Width":"362px","tileSize":"100"},{"scWidth":"1280","scHeight":"768","uiReigon1Width":"752px","uiReigon2Width":"362px","tileSize":"100"},{"scWidth":"1280","scHeight":"720","uiReigon1Width":"762px","uiReigon2Width":"362px","tileSize":"100"},{"scWidth":"1280","scHeight":"600","uiReigon1Width":"762px","uiReigon2Width":"362px","tileSize":"80"},{"scWidth":"1024","scHeight":"768","uiReigon1Width":"552px","uiReigon2Width":"362px","tileSize":"80"}];
+		var screenWidth = screen.width;
+		var screenHeight = screen.height;
+		//alert(screenWidth);
+		//alert(screenHeight);
+		var uiReigon1Width,uiReigon2Width,tileSize;
+		for(var i in agentScreen){
+			if(screenWidth == agentScreen[i].scWidth && screenHeight == agentScreen[i].scHeight){
+				uiReigon1Width = agentScreen[i].uiReigon1Width;
+				uiReigon2Width = agentScreen[i].uiReigon2Width;
+				tileSize = agentScreen[i].tileSize;
+			}
+			//alert(agentScreen[i].scWidth + "---" + agentScreen[i].scHeight);
+		}
+		//alert(uiReigon1Width + "---" + uiReigon2Width + "---" + tileSize);
+		$("div.tile-group:first").width(uiReigon1Width);
+		$("div.tile-group:last").width(uiReigon2Width);
+		var items=[];
+		
+		for (var i in menus) {
+
+			new tiles(menus[i].selfId,menus[i].parentId,menus[i].isDouble,menus[i].bgColor,menus[i].tileType,menus[i].imgSrc,menus[i].brandName,menus[i].brandCount,menus[i].badgeColor,menus[i].tileHtml).bind('click',{index: i},  function(event){
+				var i = event.data.index;
+				var submenus = menus[event.data.index].submenus;
+				$('#subFuncId').empty();
+				for (var j in submenus) {
+					new tiles(submenus[j].selfId,submenus[j].parentId,submenus[j].isDouble,submenus[j].bgColor,submenus[j].tileType,submenus[j].imgSrc,submenus[j].brandName,submenus[j].brandCount,submenus[j].badgeColor,submenus[j].tileHtml).bind('click',{index: j},  function(event){
+						var j = event.data.index;
+						moduleWindow.open({
+							id: "module_" + i + "_" + j + "_" + "Id",
+							title: submenus[j].brandName,
+							width: 1200,
+							height: 580,
+							icon: submenus[j].menuIcon,
+							minimizable: true,
+							data: {name: 'Tom', age: 18}, //传递给iframe的数据
+							content: submenus[j].menuUrl,
+							onLoad: function(dialog){
+								if(this.content && this.content.doInit){//判断弹出窗体iframe中的doInit方法是否存在
+									this.content.doInit(dialog);//调用并将参数传入，此处当然也可以传入其他内容
+								}
+							}
+							,buttons: []
+							//,buttons: [{"text":"aaa",handler:function(){}},{"text":"bbb",handler:function(){}}]
+						});
+
+					});
+					
+				
+
+
+				}
+				$('div.tile-group:last > div').each(function(i){
+
+					$(this).width(tileSize).width(tileSize+"px").height(tileSize+"px");
+					$("div[data-liffect]").addClass("play");
+
+				})
+				//$("div.tile-group:last > div").width(tileSize+"px").height(tileSize+"px");
+
+			});
+
+		}
+
+	$('div.tile-group:first > div').each(function(i){
+
+		//alert($(this).attr("class"));
+		if($(this).attr("class").indexOf("double") >= 0){
+			$(this).width((tileSize * 2 + 10)+"px").height(tileSize);
+		}else{
+			$(this).width(tileSize).height(tileSize);
+		}
+		$("div[data-liffect]").addClass("play");
+
+		
+	})
+
+})
+
+
+    </script>
+</head>
+<body class="modern-ui">
+
+
+<div class="page secondary fixed-header">
+
+
+    <div class="page-region">
+        <div class="page-region-content tiles">
+            <div  data-liffect="zoomIn" class="tile-group" id="mainFuncId">
+
+
+            </div>
+
+
+
+
+            <div  data-liffect="zoomIn" class="tile-group" id="subFuncId">
+
+
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+<div id="box"> 
+
+</div>  
+
+</body>
+</html>

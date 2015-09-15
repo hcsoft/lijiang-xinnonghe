@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE hibernate-mapping PUBLIC "hibernate-mapping" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="District" name="com.szgr.vo.DistrictVO">
+    <id type="java.lang.String" column="ID" name="ID" >
+      <generator class="assigned"/>
+    </id>
+    <property not-null = "false"  type="java.lang.String" column="Name" name="Name" />
+    <property not-null = "false"  type="java.lang.String" column="ParentID" name="ParentID" />
+    <property not-null = "false"  type="java.lang.String" column="Description" name="Description" />
+    <property not-null = "false"  type="java.lang.Integer" column="Level" name="Level" />
+    <property not-null = "false"  type="java.lang.Integer" column="IsDetail" name="IsDetail" />
+    <property not-null = "false"  type="java.lang.String" column="Name_Png" name="Name_Png" />
+    <property not-null = "false"  type="java.lang.String" column="ParentName" name="ParentName" />
+    <property not-null = "false"  type="java.lang.Integer" column="OrgID" name="OrgID" />
+  </class>
+</hibernate-mapping>

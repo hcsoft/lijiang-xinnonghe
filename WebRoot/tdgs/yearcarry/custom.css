@@ -1,0 +1,28 @@
+BODY {
+	FONT-SIZE: 12px; COLOR: #333; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+A {
+	COLOR: #fff;TEXT-DECORATION: none
+}
+.general .wrapper {
+	PADDING-RIGHT: 20px; PADDING-LEFT: 20px; FLOAT: none; PADDING-BOTTOM: 0px; MARGIN: auto; WIDTH: 940px; PADDING-TOP: 0px
+}
+
+.feature_tour .tab {
+	CLEAR: both; BACKGROUND: url(../../../images/featuresTabBg.png) no-repeat; FLOAT: left; VISIBILITY: visible; MARGIN: 12px 0px 0px 100px; WIDTH: 921px;HEIGHT:100
+}
+.feature_tour .tab A {
+	DISPLAY: block; FONT-SIZE: 14px; FLOAT: left; WIDTH: 20%; COLOR: #999; TEXT-INDENT: 20px; LINE-HEIGHT: 47px; HEIGHT: 47px; text-shadow: 0px 1px 0px #fff
+}
+.feature_tour .tab A.current {
+	COLOR: #fff; text-shadow: 0px 1px 0px #788e21
+}
+.feature_tour .mask {
+	CLEAR: both; FLOAT: left; MARGIN: 5px 0px 0px; OVERFLOW: hidden; WIDTH: 100%; POSITION: relative; HEIGHT: 455px
+}
+.feature_tour .mask .maskCon {
+	WIDTH: 4000px
+}
+.feature_tour .mask .maskCon .innerCon {
+	FLOAT: left; WIDTH: 940px; LINE-HEIGHT: 18px
+}

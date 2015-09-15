@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE hibernate-mapping PUBLIC "hibernate-mapping" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="KEY_TABLEKEYVALUES" name="com.szgr.vo.KeyTablekeyvaluesVO">
+    <composite-id name="primaryKey" class="com.szgr.vo.KeyTablekeyvaluesPK">
+      <key-property name="taxorgcode" column="taxorgcode" type="java.lang.String" />
+      <key-property name="keyname" column="keyname" type="java.lang.String" />
+    </composite-id>
+    <property not-null = "false"  type="java.lang.String" column="formatpro" name="formatpro" />
+    <property not-null = "false"  type="java.math.BigDecimal" column="maxvalue" name="maxvalue" />
+    <property not-null = "false"  type="java.lang.Integer" column="datalength" name="datalength" />
+    <property not-null = "false"  type="timestamp" column="last_frtime" name="last_frtime" />
+  </class>
+</hibernate-mapping>

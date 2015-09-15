@@ -1,0 +1,120 @@
+<head>   
+<link rel="stylesheet" href="/themes/sunny/easyui.css">
+                <link rel="stylesheet" href="/themes/icon.css">
+                <link rel="stylesheet" href="/css/toolbar.css">
+                <link rel="stylesheet" href="/css/logout.css" />
+                <link rel="stylesheet" href="/css/tablen.css" />
+                <script src="/js/jquery-1.8.2.min.js">
+                </script>
+                <script src="/js/jquery.easyui.min.js">
+                </script>
+                <script src="/js/tiles.js">
+                </script>
+                <script src="/js/moduleWindow.js">
+                </script>
+                <script src="/menus.js">
+                </script>
+                <script src="/js/jquery.simplemodal.js">
+                </script>
+                <script src="/js/overlay.js">
+                </script>
+                <script src="/js/jquery.json-2.2.js">
+                </script>
+                <script src="/js/json2.js">
+                </script>
+                <script src="/locale/easyui-lang-zh_CN.js">
+                </script>
+                <script src="/js/jquery.simplemodal.js">
+                </script>
+                <script src="/js/uploadmodal.js">
+                </script>
+                <script src="/js/common.js">
+                </script>
+                <script src="/supergis/SuperMap.Include.js">
+                </script>
+                <script src="/supergis/SuperMap-7.0.1-11323.js">
+                </script>
+                <script src="/supergis/Lang/zh-CN.js">
+                </script>
+				<script src="/js/common.js"></script>
+    <title>SuperMap iClient for JavaScript:TiledDynamicRESTLayer</title>
+    <!--引用需要的脚本-->
+    <script src="/supergis/SuperMap.Include.js">
+                </script>
+                <script src="/supergis/SuperMap-7.0.1-11323.js">
+                </script>
+                <script src="/supergis/Lang/zh-CN.js">
+                </script>
+    <script type="text/javascript">
+    //声明变量map、layer、url
+    var map, layer,
+    url = "http://localhost:8090/iserver/services/map-world/rest/maps/World";
+    //创建地图控件
+    function init() {
+        map = new SuperMap.Map ("map");
+        //创建分块动态REST图层，该图层显示iserver 7C 服务发布的地图,
+        //其中“world”为图层名称，url图层的服务地址，{transparent: true}设置到url的可选参数
+        layer = new SuperMap.Layer.TiledDynamicRESTLayer("World", url, 
+        null, {maxResolution:"auto"});
+        layer.events.on({"layerInitialized": addLayer});          
+    }             
+    function addLayer() {
+        //将Layer图层加载到Map对象上
+        map.addLayer(layer);
+        //出图，map.setCenter函数显示地图
+        map.setCenter(new SuperMap.LonLat(0, 0), 0);        
+    }
+    </script>
+</head>
+<body onload="init()">
+    <div class="easyui-layout" style="width:100%;height:500px;">
+                    <div data-options="region:'west'" id="mainWestDiv" style="height:500px;width:600px;overflow: hidden;">
+                        <table id='landinfogrid' style="height:500px;width:100;">
+                            <thead>
+                                <tr>
+                                    <th data-options="field:'estateid',hidden:true,width:50,align:'center',editor:{type:'validatebox'}">
+                                        主键
+                                    </th>
+                                    <th data-options="field:'estateserialno',width:120,align:'center',editor:{type:'validatebox'}">
+                                        宗地编号
+                                    </th>
+                                    <th data-options="field:'landcertificate',width:120,align:'center',editor:{type:'validatebox'}">
+                                        土地证号
+                                    </th>
+                                    <th data-options="field:'taxpayerid',width:100,align:'center',editor:{type:'validatebox'}">
+                                        计算机编码
+                                    </th>
+                                    <th data-options="field:'taxpayername',width:175,align:'left',editor:{type:'validatebox'}">
+                                        纳税人名称
+                                    </th>
+                                    <th data-options="field:'locationtypename',width:175,align:'center',editor:{type:'validatebox'}">
+                                        坐落地类型
+                                    </th>
+                                    <th data-options="field:'belongtocountryname',width:175,align:'center',editor:{type:'validatebox'}">
+                                        所属村委会
+                                    </th>
+                                    <th data-options="field:'holddate',width:120,align:'center',editor:{type:'validatebox'}">
+                                        交付日期
+                                    </th>
+                                    <th data-options="field:'landarea',width:120,align:'center',editor:{type:'validatebox'}">
+                                        土地面积
+                                    </th>
+                                    <th data-options="field:'landmoney',width:120,align:'center',editor:{type:'validatebox'}">
+                                        土地总价
+                                    </th>
+                                    <th data-options="field:'shouldtaxmoney',width:120,align:'center',editor:{type:'validatebox'}">
+                                        应缴金额
+                                    </th>
+                                    <th data-options="field:'alreadyshouldtaxmoney',width:120,align:'center',editor:{type:'validatebox'}">
+                                        已缴金额
+                                    </th>
+                                    <th data-options="field:'owetaxmoney',width:120,align:'center',editor:{type:'validatebox'}">
+                                        欠税金额
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+    <div id="map" style="position:absolute;left:0px;right:0px;width:800px;height:500px;" >             
+    </div>    
+</body>

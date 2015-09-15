@@ -1,0 +1,7 @@
+{                                                      
+	"total":2,                                                      
+	"rows":[                                                          
+		{"landstorid":"001","name":"Name 1","approvenumberlevel":"省","approvenumber":"201401","approvedates":"2014-01-01","belongtowns":"昆阳街道办事处","areatotal":"9000.00","areasell":"9000"},
+		{"landstorid":"002","name":"Name 1","approvenumberlevel":"省","approvenumber":"201401","approvedates":"2014-01-01","belongtowns":"昆阳街道办事处","areatotal":"9000.00","areasell":"9000"}
+	]                                                          
+} 

@@ -1,0 +1,68 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="jquery,ui,easy,easyui,web">
+	<meta name="description" content="easyui help you build your web page easily!">
+<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
+	<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="datagrid-detailview.js"></script>
+	<script type="text/javascript">
+
+		$(function(){
+			$('#dg').datagrid({
+				view: detailview,
+				detailFormatter:function(index,row){
+					return '<div style="padding:2px"><table id="ddv-' + index + '"></table></div>';
+				},
+				onExpandRow: function(index,row){
+					$('#ddv-'+index).datagrid({
+						data:[{"jsjbm":"530100000001","linenum":"2","zt":"比对缴清","nsrmc":"晋宁县XX公司","yjnse":"2000.00","yjse":"2000.00","skssqq":"2013-01-01","skssqz":"2013-01-31"},{"jsjbm":"530100000002","linenum":"1","zt":"比对有差异","nsrmc":"云南省磷化集团","yjnse":"50000.00","yjse":"38000.00","skssqq":"2013-01-01","skssqz":"2013-01-31"},{"jsjbm":"530100000003","linenum":"1","zt":"人工缴清确认","nsrmc":"昆明晋宁县阳光电力工程有限公司","yjnse":"80000.00","yjse":"75000.00","skssqq":"2013-01-01","skssqz":"2013-01-31"},{"jsjbm":"530100000004","linenum":"2","zt":"比对未缴纳","nsrmc":"昆明市晋宁房地产开发有限公司","yjnse":"12000.00","yjse":"0.00","skssqq":"2013-01-01","skssqz":"2013-01-31"},{"jsjbm":"530100000005","linenum":"2","zt":"比对未缴纳","nsrmc":" 晋宁县外贸进出口公司","yjnse":"72000.00","yjse":"0.00","skssqq":"2013-01-01","skssqz":"2013-01-31"}],
+						fitColumns:true,
+						singleSelect:true,
+						height:'auto',
+						columns:[[
+							{field:'jsjbm',title:'计算机编码',width:100,align:'center'},
+							{field:'nsrmc',title:'纳税人名称',width:300,align:'center'},
+							{field:'skssqq',title:'税款所属期起',width:100,align:'center'},
+							{field:'skssqz',title:'税款所属期止',width:100,align:'right'},
+							{field:'yjnse',title:'应缴纳税额',width:100,align:'right'},
+							{field:'yjse',title:'已缴纳税额',width:100,align:'right'},
+							{field:'zt',title:'状态',width:100}
+						]],
+						onResize:function(){
+							$('#dg').datagrid('fixDetailRowHeight',index);
+						},
+						onLoadSuccess:function(){
+							setTimeout(function(){
+								$('#dg').datagrid('fixDetailRowHeight',index);
+							},0);
+						}
+					});
+					$('#dg').datagrid('fixDetailRowHeight',index);
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	
+	<table id="dg" style="width:900px;height:400px"
+			url='datagrid_data.json'
+			title="土地应税信息"
+			singleSelect="true" fitColumns="true">
+		<thead>
+			<tr>
+				<th field="sz" align="center" width="80">税种</th>
+				<th field="ssnd" align="center" width="100">年度</th>
+				<th field="yjnse" align="right" width="80">应缴纳税额</th>
+				<th field="yjse" align="right" width="80">已缴税额</th>
+			</tr>
+		</thead>
+	</table>
+	
+	
+</body>
+</html>

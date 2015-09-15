@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE hibernate-mapping PUBLIC "hibernate-mapping" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="xnh_user" name="com.szgr.vo.XnhUserVO">
+    <id type="java.lang.String" column="user_id" name="user_id" >
+      <generator class="assigned"/>
+    </id>
+    <property not-null = "false"  type="java.lang.String" column="union_id" name="union_id" />
+    <property not-null = "false"  type="java.lang.String" column="card_id" name="card_id" />
+    <property not-null = "false"  type="java.lang.String" column="person_no" name="person_no" />
+    <property not-null = "false"  type="java.lang.String" column="user_name" name="user_name" />
+    <property not-null = "false"  type="java.lang.String" column="gender" name="gender" />
+    <property not-null = "false"  type="timestamp" column="birthday" name="birthday" />
+    <property not-null = "false"  type="java.lang.Integer" column="age" name="age" />
+    <property not-null = "false"  type="java.lang.String" column="idnumber" name="idnumber" />
+    <property not-null = "false"  type="java.lang.String" column="province" name="province" />
+    <property not-null = "false"  type="java.lang.String" column="city" name="city" />
+    <property not-null = "false"  type="java.lang.String" column="area" name="area" />
+    <property not-null = "false"  type="java.lang.String" column="town" name="town" />
+    <property not-null = "false"  type="java.lang.String" column="village" name="village" />
+    <property not-null = "false"  type="java.lang.String" column="team" name="team" />
+    <property not-null = "false"  type="java.lang.String" column="address" name="address" />
+    <property not-null = "false"  type="java.lang.String" column="telephone" name="telephone" />
+    <property not-null = "false"  type="java.lang.String" column="pic" name="pic" />
+    <property not-null = "false"  type="java.lang.String" column="org_code" name="org_code" />
+    <property not-null = "false"  type="java.lang.String" column="leader_flag" name="leader_flag" />
+    <property not-null = "false"  type="java.lang.String" column="leader_id" name="leader_id" />
+    <property not-null = "false"  type="java.lang.String" column="leader_relation" name="leader_relation" />
+    <property not-null = "false"  type="java.lang.String" column="role_id" name="role_id" />
+    <property not-null = "false"  type="java.lang.String" column="pay_level" name="pay_level" />
+    <property not-null = "false"  type="java.lang.String" column="hospital_id" name="hospital_id" />
+    <property not-null = "false"  type="java.lang.String" column="valid" name="valid" />
+  </class>
+</hibernate-mapping>

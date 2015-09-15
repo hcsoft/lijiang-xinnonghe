@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<http entry-point-ref="authenticationEntryPoint" auto-config="true"><!-- 当访问被拒绝时，会转到403.jsp -->
+		<intercept-url pattern="/login/login.jsp" filters="none" />
+		<intercept-url pattern="/login/random.jsp" filters="none" />
+		<intercept-url pattern="/themes/**" filters="none" />
+		<intercept-url pattern="/images/**" filters="none" />
+		<intercept-url pattern="/common/**" filters="none" />
+		<intercept-url pattern="/uploadTest.html" filters="none" />
+		<intercept-url pattern="/UploadServlet" filters="none" />
+		<intercept-url pattern="/cors/**" filters="none" />
+		<intercept-url pattern="/**/*.do" filters="none" />
+		<intercept-url pattern="/**/*.html" filters="none" />
+		<intercept-url pattern="/jnds_rest" filters="none" />
+		
+		
+		<intercept-url pattern="/js/**" filters="none" />
+		<intercept-url pattern="/**/*.ico" filters="none" />
+		<intercept-url pattern="/**/*.jpg" filters="none" />
+		<intercept-url pattern="/**/*.gif" filters="none" />
+		<intercept-url pattern="/**/*.js" filters="none" />
+		<intercept-url pattern="/**/*.css" filters="none" />
+		<intercept-url pattern="/css/**" filters="none" />
+		<form-login login-page="/login/login.jsp" always-use-default-target="true"
+			authentication-failure-url="/login/login.jsp"
+			default-target-url="/main.jsp"/>
+		<http-basic />
+		<logout logout-success-url="/login/login.jsp" />
+		<access-denied-handler ref="accessDeniedHandler"/>
+		
+<!--		<custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="authorityFilter"/>-->
+		
+		<session-management invalid-session-url="/timeOut.jsp">
+		</session-management>
+		
+		<!-- 处理匿名访问 -->
+		<anonymous username="guest"/>
+	</http>
+	
+
+	<b:bean id="authorityFilter"
+		class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<b:property name="authenticationManager"
+			ref="authenticationManager" />
+		<b:property name="accessDecisionManager"
+			ref="authorityAccessDecisionManager" />
+		<b:property name="securityMetadataSource"
+			ref="securityMetadataSource" />
+	</b:bean>
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider
+			user-service-ref="authorityUserDetailsService">
+		</authentication-provider>
+	</authentication-manager>
+
+	<b:bean id="authorityUserDetailsService"
+		class="com.szgr.framework.authority.AuthorUserDetailsService" />
+
+	<b:bean id="authorityAccessDecisionManager"
+		class="com.szgr.framework.authority.AuthorAccessDecisionManager" />
+
+	<b:bean id="securityMetadataSource"
+		class="com.szgr.framework.authority.AuthorInvocationSecurityMetadataSource" />
+	
+
+	<b:bean id="accessDeniedHandler" class="com.szgr.framework.authority.AuthorAccessDeniedHandler">
+		<b:property name="errorPage" value="/403.jsp"></b:property>
+	</b:bean>
+	<b:bean id="authenticationEntryPoint" class="com.szgr.framework.authority.AuthorAuthenticationEntryPoint">
+		<b:property name="loginFormUrl" value="/login/login.jsp"></b:property>
+	</b:bean>
+
+	<b:bean id="webInvocationPrivilegeEvaluator"
+		class="org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator">
+		<b:constructor-arg ref="authorityFilter" />
+	</b:bean>
+</b:beans>

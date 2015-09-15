@@ -1,0 +1,68 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="jquery,ui,easy,easyui,web">
+	<meta name="description" content="easyui help you build your web page easily!">
+<link rel="stylesheet" type="text/css" href="../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="icon.css">
+	<link rel="stylesheet" type="text/css" href="demo.css">
+	<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="datagrid-detailview.js"></script>
+	<script type="text/javascript">
+
+		$(function(){
+			$('#dg').datagrid({
+				view: detailview,
+				detailFormatter:function(index,row){
+					return '<div style="padding:2px"><table id="ddv-' + index + '"></table></div>';
+				},
+				onExpandRow: function(index,row){
+					$('#ddv-'+index).datagrid({
+						data:[{"sz":"耕地占用税","skssqrq":"2013-01-01","sksszrq":"2013-01-31","yjnse":"600.00","yjse":"600.00","qjse":"0.00"},{"sz":"土地使用税","skssqrq":"2013-01-01","sksszrq":"2013-01-31","yjnse":"800.00","yjse":"800.00","qjse":"0.00"},{"sz":"房产税","skssqrq":"2013-01-01","sksszrq":"2013-01-31","yjnse":"600.00","yjse":"600.00","qjse":"0.00"}],
+						fitColumns:true,
+						singleSelect:true,
+						height:'auto',
+						columns:[[
+							{field:'sz',title:'税种',width:100,align:'center'},
+							{field:'skssqrq',title:'税款所属起日期',width:100,align:'center'},
+							{field:'sksszrq',title:'税款所属止日期',width:100,align:'center'},
+							{field:'yjnse',title:'应缴纳税额',width:100,align:'right'},
+							{field:'yjse',title:'已缴纳税额',width:100,align:'right'},
+							{field:'qjse',title:'欠税额',width:100,align:'right'}
+						]],
+						onResize:function(){
+							$('#dg').datagrid('fixDetailRowHeight',index);
+						},
+						onLoadSuccess:function(){
+							setTimeout(function(){
+								$('#dg').datagrid('fixDetailRowHeight',index);
+							},0);
+						}
+					});
+					$('#dg').datagrid('fixDetailRowHeight',index);
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	
+	<table id="dg" style="width:900px;height:400px"
+			url='datagrid_datadetail2.json'
+			title="土地应税信息"
+			singleSelect="true" fitColumns="true">
+		<thead>
+			<tr>
+				<th field="jsjbm" align="center" width="80">计算机编码</th>
+				<th field="nsrmc" align="center" width="100">纳税人名称</th>
+				<th field="yjnse" align="right" width="80">应缴纳税额</th>
+				<th field="yjse" align="right" width="80">已缴税额</th>
+				<th field="qjse" align="right" width="80">欠缴税额</th>
+			</tr>
+		</thead>
+	</table>
+	
+	
+</body>
+</html>

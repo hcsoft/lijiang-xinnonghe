@@ -1,0 +1,7 @@
+{"total":28,"rows":[
+	{"querytype":"1","querytypename":"按主管地税部门"},
+	{"querytype":"2","querytypename":"按税收管理员"},
+	{"querytype":"3","querytypename":"按所属乡镇"},
+	{"querytype":"4","querytypename":"按注册类型"},
+	{"querytype":"5","querytypename":"按行业"}
+]}

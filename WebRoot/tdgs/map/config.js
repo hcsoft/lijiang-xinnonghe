@@ -1,0 +1,3 @@
+var layerConfig = [{"layerId":"0","config":"true"},{"layerId":"1","config":"true"},{"layerId":"2","config":"false"},{"layerId":"3","config":"false"},{"layerId":"4","config":"true"},{"layerId":"5","config":"false"},{"layerId":"6","config":"false"},{"layerId":"7","config":"true"},{"layerId":"8","config":"true"}];
+var featureConfig = [{"layerId":"8","layer":"belongtowns"},{"layerId":"7","layer":"village"},{"layerId":"1","layer":"tdgy"},
+	{"layerId":"0","layer":"taxpayerinfo"}];
