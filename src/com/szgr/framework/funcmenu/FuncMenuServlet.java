@@ -48,7 +48,7 @@ public class FuncMenuServlet {
 			.getLogger(FuncMenuServlet.class);
 	@Autowired
 	HibernateTemplate hibernateTemplate;
-	// ´úÂë»º´æ
+	// ä»£ç ç¼“å­˜
 	@Resource(name = "com.szgr.cache.options.code.CodeOption")
 	private ICodeOption codeOption;
 
@@ -290,7 +290,7 @@ public class FuncMenuServlet {
 	}
 
 	/**
-	 * Éú³ÉroleIdstr£¨ÀıÈç'a','b','c'£©
+	 * ç”ŸæˆroleIdstrï¼ˆä¾‹å¦‚'a','b','c'ï¼‰
 	 * 
 	 * @param authorities
 	 * @return

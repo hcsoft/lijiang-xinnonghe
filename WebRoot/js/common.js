@@ -943,6 +943,7 @@ function formatnumber(num){
 	if(num==null){
 		num = 0;
 	}
+	num = new Number(num);
 	num = String(num.toFixed(2));
     return num;
 }

@@ -8,13 +8,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.szgr.framework.authority.UserInfo;
-import com.szgr.framework.authority.services.Authority.bean.AuthorityBean;
 import com.thtf.ynds.vo.CodTaxorgcodeVO;
 
 public class SystemUserAccessor {
@@ -38,7 +35,7 @@ public class SystemUserAccessor {
 	}
 	
 	/**
-	 * ÉèÖÃÄ£¿éID
+	 * ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ID
 	 * 
 	 * @param moduleAuth
 	 */
@@ -58,12 +55,12 @@ public class SystemUserAccessor {
 		return this.systemUser.getAuthflag();
 	}
 
-	public String getLevyflag() {
-		return this.systemUser.getLevyflag();
+	public String getNormalflag() {
+		return this.systemUser.getNormalflag();
 	}
 
-	public String getLeaderflag() {
-		return this.systemUser.getLeaderflag();
+	public String getDoctorflag() {
+		return this.systemUser.getDoctorflag();
 	}
 	public String getPassword() {
 		return this.systemUser.getPassword();
@@ -77,10 +74,12 @@ public class SystemUserAccessor {
 		return this.systemUser.getTaxempname();
 	}
 
-	public String getTaxmanageflag() {
-		return this.systemUser.getTaxmanageflag();
+	public String getNurseflag() {
+		return this.systemUser.getNurseflag();
 	}
-
+	public String getPublicdoctorflag() {
+		return this.systemUser.getPublicdoctorflag();
+	}
 	public String getTaxorgcode() {
 		return this.systemUser.getTaxorgcode();
 	}
@@ -93,7 +92,7 @@ public class SystemUserAccessor {
 		StringBuffer sb = new StringBuffer();
 		String righttype = this.systemUser.getModuleAuth();
 		String rightssql = getRightSqlFromType(righttype + "s");
-		sb.append("µ±Ç°ÓÃ»§²Ù×÷µÄÓÃ»§È¨ÏÞÎª£º"+righttype+"="+rightssql);
+		sb.append("ï¿½ï¿½Ç°ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½È¨ï¿½ï¿½Îªï¿½ï¿½"+righttype+"="+rightssql);
 		return sb.toString();
 	}
 	public String[] getCurrentModuleSelectRight() {

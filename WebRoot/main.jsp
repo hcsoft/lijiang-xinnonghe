@@ -110,7 +110,7 @@ $(function(){
 						new tiles(menus[i].selfId,menus[i].parentId,menus[i].isDouble,menus[i].bgColor,menus[i].tileType,menus[i].imgSrc,menus[i].brandName,menus[i].brandCount,menus[i].badgeColor,menus[i].tileHtml,menus[i].todoUrl,menus[i].todoMenuid).bind('click',{index: i},  function(event){
 							var brothernodes = $(this).siblings();
 							for(var j = 0;j < brothernodes.length;j++){
-								$(brothernodes[j]).fadeTo('fast',0.35);
+								$(brothernodes[j]).fadeTo(1,0.1);
 							}
 							 $(this).fadeTo('fast',1);
 							var i = event.data.index;

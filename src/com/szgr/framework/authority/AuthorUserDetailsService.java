@@ -8,7 +8,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -32,7 +31,7 @@ import com.thtf.ynds.vo.CodTaxempcodeVO;
 import com.thtf.ynds.vo.CodTaxorgcodeVO;
 
 /**
- * Ö÷ÌåĞÅÏ¢´¦ÀíÀà
+ * ä¸»ä½“ä¿¡æ¯å¤„ç†ç±»
  * 
  * 
  */
@@ -48,14 +47,14 @@ public class AuthorUserDetailsService implements UserDetailsService {
 	HibernateTemplate hibernateTemplate;
 
 	/*
-	 * (non-Javadoc) »ñÈ¡Ö÷ÌåĞÅÏ¢(×¢:Í¬Ê±´¦ÀíÁË×Ô¶¯µÇÂ¼Êı¾İ)
+	 * (non-Javadoc) è·å–ä¸»ä½“ä¿¡æ¯(æ³¨:åŒæ—¶å¤„ç†äº†è‡ªåŠ¨ç™»å½•æ•°æ®)
 	 * 
 	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
 	 */
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException, DataAccessException {
 		// TODO Auto-generated method stub
-		// ·â×°ÓÃ»§ĞÅÏ¢
+		// å°è£…ç”¨æˆ·ä¿¡æ¯
 		UserInfo userInfo = new UserInfo();
 		String trueUserName = username;
 		String loginFlag = "";
@@ -66,7 +65,7 @@ public class AuthorUserDetailsService implements UserDetailsService {
 		}
 
 		userInfo.setLogincode(trueUserName);
-		// Éú³É·şÎñÇëÇóbean
+		// ç”ŸæˆæœåŠ¡è¯·æ±‚bean
 		AuthorityBean req = new AuthorityBean();
 		req.setUserInfo(userInfo);
 		AuthorityBean result = null;
@@ -75,7 +74,7 @@ public class AuthorUserDetailsService implements UserDetailsService {
 			result = (AuthorityBean) getUser(req);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			log.error("¡¾»ñÈ¡·şÎñÊ±³öÏÖÒì³£¡¿", e);
+			log.error("ã€è·å–æœåŠ¡æ—¶å‡ºç°å¼‚å¸¸ã€‘", e);
 			e.printStackTrace();
 		}
 		if (result != null && result.getUserInfo() != null) {
@@ -85,13 +84,13 @@ public class AuthorUserDetailsService implements UserDetailsService {
 				returnUserInfo.setLoginFlag("autologin");
 			}
 			Set authoritieSet = new HashSet<GrantedAuthority>();
-			// Æú³ıÖØ¸´Ïî
+			// å¼ƒé™¤é‡å¤é¡¹
 			for (Object temp : result.getRoles()) {
 				authoritieSet.add(new GrantedAuthorityBO((RoleBO) temp));
 			}
 			returnUserInfo.setAuthorities(authoritieSet);
 		} else {
-			throw new UsernameNotFoundException("´ËÓÃ»§²»´æÔÚ");
+			throw new UsernameNotFoundException("æ­¤ç”¨æˆ·ä¸å­˜åœ¨");
 		}
 		return returnUserInfo;
 	}
@@ -126,7 +125,7 @@ public class AuthorUserDetailsService implements UserDetailsService {
 
 				Session session = hibernateTemplate.getSessionFactory()
 						.getCurrentSession();
-				// »ñÈ¡Êı¾İÈ¨ÏŞ
+				// è·å–æ•°æ®æƒé™
 				List rightlist = DataRightsBI.loadDataRightsFromDB(session,
 						orgvo, tempuser.getTaxempcode());
 				user.setUserrights(rightlist);
@@ -158,13 +157,13 @@ public class AuthorUserDetailsService implements UserDetailsService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("¡¾¼ìÑéµ±Ç°ÓÃ»§ÊÇ·ñ´æÔÚÒì³£¡¿", e);
+			log.error("ã€æ£€éªŒå½“å‰ç”¨æˆ·æ˜¯å¦å­˜åœ¨å¼‚å¸¸ã€‘", e);
 		}
 		return returnBean;
 	}
 
 	/**
-	 * µ±Ç°ÓÃ»§Ö÷ÌåĞÅÏ¢´æÔÚµÄ»°£¬»ñÈ¡ÓÃ»§¶ÔÓ¦µÄ½ÇÉ«ĞÅÏ¢
+	 * å½“å‰ç”¨æˆ·ä¸»ä½“ä¿¡æ¯å­˜åœ¨çš„è¯ï¼Œè·å–ç”¨æˆ·å¯¹åº”çš„è§’è‰²ä¿¡æ¯
 	 * 
 	 * @param user
 	 * @return
@@ -184,17 +183,17 @@ public class AuthorUserDetailsService implements UserDetailsService {
 				.append("role.enabled='1' and role.role_id=g2r.role_id and g2r.group_id=u2g.group_id and u2g.user_id =:user_id ");
 		List tempRoles = new ArrayList();
 		try {
-			// Í¨¹ıÓÃ»§idÀ´»ñÈ¡ÓÃ»§½ÇÉ«
+			// é€šè¿‡ç”¨æˆ·idæ¥è·å–ç”¨æˆ·è§’è‰²
 			List userRoles = hibernateTemplate.findByNamedParam(
 					hql1.toString(), "userId", user.getTaxempcode());
 			tempRoles.addAll(userRoles);
-			// Í¨¹ıÓÃ»§×é¹ØÁªÀ´»ñÈ¡ÓÃ»§½ÇÉ«
+			// é€šè¿‡ç”¨æˆ·ç»„å…³è”æ¥è·å–ç”¨æˆ·è§’è‰²
 			List groupRoles = hibernateTemplate.findByNamedParam(hql2
 					.toString(), "user_id", user.getTaxempcode());
 			tempRoles.addAll(groupRoles);
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.error("¡¾»ñÈ¡ÓÃ»§¶ÔÓ¦µÄ½ÇÉ«ĞÅÏ¢³öÏÖÒì³£¡¿", e);
+			log.error("ã€è·å–ç”¨æˆ·å¯¹åº”çš„è§’è‰²ä¿¡æ¯å‡ºç°å¼‚å¸¸ã€‘", e);
 		}
 
 		return tempRoles;

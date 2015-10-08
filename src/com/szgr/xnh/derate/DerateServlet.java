@@ -1,5 +1,7 @@
 package com.szgr.xnh.derate;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,13 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.szgr.common.uid.UUIDGener;
 import com.szgr.framework.authority.datarights.SystemUserAccessor;
 import com.szgr.framework.pagination.PageUtil;
-import com.szgr.util.Keyvalue;
+import com.szgr.framework.util.StringUtil;
+import com.szgr.vo.XnhDerateVO;
 import com.szgr.vo.XnhUserVO;
 import com.szgr.xnh.user.ChangecardBvo;
-import com.szgr.xnh.user.UnionBvo;
-import com.tdgs.vo.RegTaxregistmainVO;
 
 @Controller
 @RequestMapping("/Derate")
@@ -38,7 +40,7 @@ public class DerateServlet {
 	@ResponseBody
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
 	public JSONObject getUserInfo(QueryBean req) {
-		String sql = "select user_id,union_id,card_id,user_name,gender,birthday,age,idnumber,province,city,area,town,village,team,address,telephone,pic,org_code,leader_flag,leader_id,leader_relation,role_id,hospital_id,valid "
+		String sql = "select user_id,union_id,card_id,user_name,person_no,gender,birthday,age,idnumber,province,city,area,town,village,team,address,telephone,pic,org_code,leader_flag,leader_id,leader_relation,role_id,hospital_id,valid "
 				+ " from xnh_user  where  1=1  ";//查询出除已审核状态的数据
 		if (req.getUser_id() != null
 				&& !"".equals(req.getUser_id())) {
@@ -66,7 +68,7 @@ public class DerateServlet {
 		attrMap.put("union_id", Hibernate.STRING);
 		attrMap.put("card_id", Hibernate.STRING);
 		attrMap.put("user_name", Hibernate.STRING);
-		attr
+		attrMap.put("person_no", Hibernate.STRING);
 		attrMap.put("gender", Hibernate.STRING);
 		attrMap.put("birthday", Hibernate.DATE);
 		attrMap.put("age", Hibernate.INTEGER);
@@ -94,60 +96,21 @@ public class DerateServlet {
 		return jSONObject;
 	}
 
-	@RequestMapping(value = "/saveUnioninfo")
+	@RequestMapping(value = "/saveDerate")
 	@ResponseBody
 	@Transactional(propagation = Propagation.REQUIRED)
-	public UnionBvo saveUnioninfo(
-			@RequestBody HashMap<String, List> map) {
+	public String saveDerate(
+			@RequestBody HashMap<String, List> map) throws Exception {
+		String optorgcode = SystemUserAccessor.getInstance().getTaxorgcode();
+		String optempcode = SystemUserAccessor.getInstance().getTaxempcode();
 		LinkedHashMap maininfo = (LinkedHashMap) map.get("maininfo");
-		String taxorgcode = SystemUserAccessor.getInstance().getTaxorgcode().substring(0, 6)+"000001";
-		RegTaxregistmainVO regvo = null;
-		XnhUserVO vo;
-		String user_id = "";
-		String union_id = "";
-		String card_id = "";
-		if (maininfo.get("user_id").toString() == null
-				|| "".equals(maininfo.get("user_id").toString())) {// 新增
-			String taxpayerid ="";
-			String taxpayername = "";
-			vo = new XnhUserVO();
-			user_id = Keyvalue.getkeyvalue(taxorgcode, "user_id");
-			vo.setUser_id(user_id);
-			vo.setUser_name(maininfo.get("user_name").toString());
-			//union_id = Keyvalue.getkeyvalue(taxorgcode, "union_id");
-			union_id = maininfo.get("union_id").toString();
-			card_id = maininfo.get("card_id").toString();
-			vo.setUnion_id(union_id);
-			vo.setCard_id(card_id);
-			vo.setGender(maininfo.get("gender").toString());
-			vo.setAge(Integer.parseInt(maininfo.get("age").toString()));
-			vo.setOrg_code("");//
-			vo.setTelephone(maininfo.get("telephone").toString());
-			vo.setLeader_flag("1");//户主
-			vo.setValid("1");
-			hibernateTemplate.getSessionFactory().getCurrentSession().saveOrUpdate(vo);
-			hibernateTemplate.getSessionFactory().getCurrentSession().flush();
-			hibernateTemplate.getSessionFactory().getCurrentSession().clear();
-		} else {
-			user_id = maininfo.get("user_id").toString();
-//			union_id = maininfo.get("union_id").toString();
-			vo = (XnhUserVO) hibernateTemplate.getSessionFactory().getCurrentSession().get(XnhUserVO.class, user_id);
-			vo.setUser_name(maininfo.get("user_name").toString());
-			union_id = maininfo.get("union_id").toString();
-			card_id = maininfo.get("card_id").toString();
-			vo.setUnion_id(union_id);
-			vo.setCard_id(card_id);
-			vo.setGender(maininfo.get("gender").toString());
-			vo.setAge(Integer.parseInt(maininfo.get("age").toString()));
-			vo.setOrg_code("");//
-			vo.setTelephone(maininfo.get("telephone").toString());
-			vo.setLeader_flag("1");//户主
-			vo.setValid("1");
-			hibernateTemplate.getSessionFactory().getCurrentSession().saveOrUpdate(vo);
-			hibernateTemplate.getSessionFactory().getCurrentSession().flush();
-			hibernateTemplate.getSessionFactory().getCurrentSession().clear();
+		
+		String user_id = (String) maininfo.get("user_id");
+		XnhUserVO uservo = (XnhUserVO) hibernateTemplate.getSessionFactory().getCurrentSession().get(XnhUserVO.class, user_id);
+		if(uservo == null){
+			throw new Exception("该用户不存在");
 		}
-
+		String derate_type = (String) maininfo.get("derate_type");
 		List insertedlist = (List) map.get("inserted");
 		List deletedlist = (List) map.get("deleted");
 		List updatedlist = (List) map.get("updated");
@@ -155,18 +118,24 @@ public class DerateServlet {
 		if (insertedlist != null && insertedlist.size() > 0) {
 			for (int i = 0; i < insertedlist.size(); i++) {
 				LinkedHashMap insertmap = (LinkedHashMap) insertedlist.get(i);
-				XnhUserVO subvo = new XnhUserVO();
-				subvo.setUser_id(Keyvalue.getkeyvalue(taxorgcode, "user_id"));
-				subvo.setUnion_id(union_id);
-				subvo.setCard_id(card_id);
-				subvo.setGender(insertmap.get("gender").toString());
-				subvo.setUser_name(insertmap.get("user_name").toString());
-				subvo.setOrg_code("");
-				subvo.setLeader_flag("00");
-				subvo.setLeader_id(user_id);
-				subvo.setLeader_relation(insertmap.get("leader_relation").toString());
-				subvo.setValid("1");
-				hibernateTemplate.getSessionFactory().getCurrentSession().save(subvo);
+				XnhDerateVO derateVO = new XnhDerateVO();
+				derateVO.setSerialno(UUIDGener.getUUID());
+				derateVO.setUser_id(user_id);
+				derateVO.setUnion_id(uservo.getUnion_id());
+				derateVO.setCard_id(uservo.getCard_id());
+				derateVO.setHospital_begindate(insertmap.get("hospital_begindate")==null?null:StringUtil.stringToDate(insertmap.get("hospital_begindate").toString()));
+				derateVO.setHospital_enddate(insertmap.get("hospital_enddate")==null?null:StringUtil.stringToDate(insertmap.get("hospital_enddate").toString()));
+				derateVO.setDiagnose(insertmap.get("diagnose")==null?"":insertmap.get("diagnose").toString());
+				derateVO.setDerate_type(derate_type);
+				derateVO.setDerate_date(StringUtil.stringToDate(insertmap.get("derate_date").toString()));
+				derateVO.setActual_amount(new BigDecimal(insertmap.get("actual_amount").toString()));
+				derateVO.setDerate_amount(new BigDecimal(insertmap.get("derate_amount").toString()));
+				derateVO.setDerate_sumamount(new BigDecimal(insertmap.get("derate_sumamount").toString()));
+				derateVO.setOpt_empcode(optempcode);
+				derateVO.setOpt_orgcode(optorgcode);
+				derateVO.setDoctor(insertmap.get("doctor")==null?"":insertmap.get("doctor").toString());
+				derateVO.setOptdate(new Date());
+				hibernateTemplate.getSessionFactory().getCurrentSession().save(derateVO);
 				hibernateTemplate.getSessionFactory().getCurrentSession().flush();
 				hibernateTemplate.getSessionFactory().getCurrentSession().clear();
 			}
@@ -174,8 +143,8 @@ public class DerateServlet {
 		if (deletedlist != null && deletedlist.size() > 0) {
 			for (int i = 0; i < deletedlist.size(); i++) {
 				LinkedHashMap deletemap = (LinkedHashMap) deletedlist.get(i);
-				String delete_user_id = deletemap.get("user_id").toString();
-				String hql = "delete from XnhUserVO where user_id='"+ delete_user_id + "'";
+				String serialno = deletemap.get("serialno").toString();
+				String hql = "delete from XnhDerateVO where serialno='"+ serialno + "'";
 				hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql).executeUpdate();
 				hibernateTemplate.getSessionFactory().getCurrentSession().flush();
 				hibernateTemplate.getSessionFactory().getCurrentSession().clear();
@@ -184,120 +153,75 @@ public class DerateServlet {
 		if (updatedlist != null && updatedlist.size() > 0) {
 			for (int i = 0; i < updatedlist.size(); i++) {
 				LinkedHashMap updatemap = (LinkedHashMap) updatedlist.get(i);
-				String hql = "update XnhUserVO set user_name='"
-						+ updatemap.get("user_name").toString() + "',"
-						+ "gender ='"
-						+ updatemap.get("gender").toString() + "',"
-						+ "age ="
-						+ updatemap.get("age").toString() + ","
-						+ "org_code ='"
-						+ updatemap.get("org_code").toString() + "',"
-						+ "leader_relation ='"
-						+ updatemap.get("leader_relation").toString() + "' "
-						+ " where user_id='"
-						+ updatemap.get("user_id").toString() + "'";
+				String hospital_begindate = updatemap.get("hospital_begindate")==null?null:"'"+updatemap.get("hospital_begindate").toString()+"'";
+				String hospital_enddate = updatemap.get("hospital_enddate")==null?null:"'"+updatemap.get("hospital_enddate").toString()+"'";
+				String diagnose = updatemap.get("diagnose")==null?null:"'"+updatemap.get("diagnose").toString()+"'";
+				String doctor = updatemap.get("doctor")==null?null:"'"+updatemap.get("doctor").toString()+"'";
+				String hql = "update XnhDerateVO set hospital_begindate="
+						+ hospital_begindate + ","
+						+ "hospital_enddate ="
+						+ hospital_enddate + ","
+						+ "diagnose ="
+						+ diagnose + ","
+						+ "derate_date ='"
+						+ updatemap.get("derate_date").toString() + "',"
+						+ "actual_amount ="
+						+ updatemap.get("actual_amount").toString() + ", "
+						+ "derate_amount ="
+						+ updatemap.get("derate_amount").toString() + ", "
+						+ "derate_sumamount ="
+						+ updatemap.get("derate_sumamount").toString() + ", "
+						+ "opt_orgcode ='"
+						+ optorgcode + "', "
+						+ "opt_empcode ='"
+						+ optempcode + "', "
+						+ "doctor ="
+						+ doctor + ", optdate=getdate() "
+						+ " where serialno='"
+						+ updatemap.get("serialno").toString() + "'";
 				hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql).executeUpdate();
 				hibernateTemplate.getSessionFactory().getCurrentSession().flush();
 				hibernateTemplate.getSessionFactory().getCurrentSession().clear();
 			}
 		}
-		UnionBvo bvo = getUnioninfo(user_id);
-		return bvo;
+		return "操作成功";
 	}
 
-	@RequestMapping(value = "/getUnioninfo")
-	@ResponseBody
-	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-	public UnionBvo getUnioninfo(
-			@RequestParam("user_id") String user_id) {
-		XnhUserVO vo = (XnhUserVO) hibernateTemplate
-				.getSessionFactory().getCurrentSession()
-				.get(XnhUserVO.class, user_id);
-		UnionBvo bvo = new UnionBvo();
-		bvo.setUser_id(vo.getUser_id());
-		bvo.setUnion_id(vo.getUnion_id());
-		bvo.setCard_id(vo.getCard_id());
-		bvo.setUser_name(vo.getUser_name());
-		bvo.setGender(vo.getGender());
-		bvo.setBirthday(vo.getBirthday());
-		bvo.setAge(vo.getAge());
-		bvo.setIdnumber(vo.getIdnumber());
-		bvo.setProvince(vo.getProvince());
-		bvo.setCity(vo.getCity());
-		bvo.setArea(vo.getArea());
-		bvo.setTown(vo.getTown());
-		bvo.setVillage(vo.getVillage());
-		bvo.setTeam(vo.getTeam());
-		bvo.setAddress(vo.getAddress());
-		bvo.setTelephone(vo.getTelephone());
-		bvo.setPic(vo.getPic());
-		bvo.setOrg_code(vo.getOrg_code());
-		bvo.setLeader_flag(vo.getLeader_flag());
-		bvo.setLeader_id(vo.getLeader_id());
-		bvo.setLeader_relation(vo.getLeader_relation());
-		bvo.setRole_id(vo.getRole_id());
-		bvo.setHospital_id(vo.getHospital_id());
-		bvo.setValid(vo.getValid());
-		
-		String hql = "from XnhUserVO where leader_id ='" + user_id
-				+ "'";
-		List<XnhUserVO> subvolist = hibernateTemplate
-				.getSessionFactory().getCurrentSession().createQuery(hql)
-				.list();
-		bvo.setMemberlist(subvolist);
-		return bvo;
-	}
 	
-	@RequestMapping(value = "/getUnioninfo2")
+	@RequestMapping(value = "/getDeratelist")
 	@ResponseBody
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-	public UnionBvo getUnioninfo2(
-			@RequestParam("union_id") String union_id,@RequestParam("card_id") String card_id) {
-		String hql = "from XnhUserVO where 1=1 ";
-		if(union_id != null && !"".equals(union_id)){
-			hql = hql + " and union_id = '"+union_id+"'";
+	public JSONObject getDeratelist(QueryBean req) {
+		String sql = "select serialno,user_id,hospital_begindate,hospital_enddate,diagnose,derate_type,derate_date,actual_amount,derate_amount,derate_sumamount,doctor,opt_orgcode,opt_empcode "
+				+ " from xnh_derate  where  1=1  ";//查询出除已审核状态的数据
+		if (req.getUser_id() != null
+				&& !"".equals(req.getUser_id())) {
+			sql = sql + " and user_id='" + req.getUser_id() + "'";
 		}
-		if(card_id != null && !"".equals(card_id)){
-			hql = hql + " and card_id = '"+card_id+"'";
+		if (req.getDerate_type() != null
+				&& !"".equals(req.getDerate_type())) {//新农合证
+			sql = sql + " and derate_type='" + req.getDerate_type() + "'";
 		}
-		List<XnhUserVO> mainvolist = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql)
-				.list();
-		UnionBvo bvo = new UnionBvo();
-		if(mainvolist != null && mainvolist.size() >0){
-			XnhUserVO vo = mainvolist.get(0);
-			bvo.setUser_id(vo.getUser_id());
-			bvo.setUnion_id(vo.getUnion_id());
-			bvo.setCard_id(vo.getCard_id());
-			bvo.setUser_name(vo.getUser_name());
-			bvo.setGender(vo.getGender());
-			bvo.setBirthday(vo.getBirthday());
-			bvo.setAge(vo.getAge());
-			bvo.setIdnumber(vo.getIdnumber());
-			bvo.setProvince(vo.getProvince());
-			bvo.setCity(vo.getCity());
-			bvo.setArea(vo.getArea());
-			bvo.setTown(vo.getTown());
-			bvo.setVillage(vo.getVillage());
-			bvo.setTeam(vo.getTeam());
-			bvo.setAddress(vo.getAddress());
-			bvo.setTelephone(vo.getTelephone());
-			bvo.setPic(vo.getPic());
-			bvo.setOrg_code(vo.getOrg_code());
-			bvo.setLeader_flag(vo.getLeader_flag());
-			bvo.setLeader_id(vo.getLeader_id());
-			bvo.setLeader_relation(vo.getLeader_relation());
-			bvo.setRole_id(vo.getRole_id());
-			bvo.setHospital_id(vo.getHospital_id());
-			bvo.setValid(vo.getValid());
-			
-			hql = "from XnhUserVO where leader_id ='" + vo.getUser_id()
-					+ "'";
-			List<XnhUserVO> subvolist = hibernateTemplate
-					.getSessionFactory().getCurrentSession().createQuery(hql)
-					.list();
-			bvo.setMemberlist(subvolist);
-		}
-		return bvo;
+		sql = sql +" order by derate_date";
+		Map<String, Object> attrMap = new LinkedHashMap<String, Object>();
+		attrMap.put("user_id", Hibernate.STRING);
+		attrMap.put("serialno", Hibernate.STRING);
+		attrMap.put("hospital_begindate", Hibernate.DATE);
+		attrMap.put("hospital_enddate", Hibernate.DATE);
+		attrMap.put("diagnose", Hibernate.STRING);
+		attrMap.put("derate_type", Hibernate.STRING);
+		attrMap.put("derate_date", Hibernate.DATE);
+		attrMap.put("actual_amount", Hibernate.BIG_DECIMAL);
+		attrMap.put("derate_amount", Hibernate.BIG_DECIMAL);
+		attrMap.put("derate_sumamount", Hibernate.BIG_DECIMAL);
+		attrMap.put("opt_orgcode", Hibernate.STRING);
+		attrMap.put("opt_empcode", Hibernate.STRING);
+		attrMap.put("doctor", Hibernate.STRING);
+		JSONObject jSONObject = PageUtil.paginateCustomNativeSqlJson(sql,
+				Integer.parseInt(req.getPage()), 15, XnhDerateVO.class,
+				hibernateTemplate.getSessionFactory().getCurrentSession(),
+				attrMap);
+		return jSONObject;
 	}
 	
 

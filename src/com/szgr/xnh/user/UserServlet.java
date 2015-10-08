@@ -23,7 +23,6 @@ import com.szgr.framework.pagination.PageUtil;
 import com.szgr.framework.util.StringUtil;
 import com.szgr.util.Keyvalue;
 import com.szgr.vo.XnhUserVO;
-import com.tdgs.vo.RegTaxregistmainVO;
 
 @Controller
 @RequestMapping("/Userinfo")
@@ -83,7 +82,6 @@ public class UserServlet {
 			@RequestBody HashMap<String, List> map) {
 		LinkedHashMap maininfo = (LinkedHashMap) map.get("maininfo");
 		String taxorgcode = SystemUserAccessor.getInstance().getTaxorgcode().substring(0, 6)+"000001";
-		RegTaxregistmainVO regvo = null;
 		XnhUserVO vo;
 		String user_id = "";
 		String union_id = "";
@@ -242,7 +240,7 @@ public class UserServlet {
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
 	public UnionBvo getUnioninfo2(
 			@RequestParam("union_id") String union_id,@RequestParam("card_id") String card_id) {
-		String hql = "from XnhUserVO where 1=1 ";
+		String hql = "from XnhUserVO where 1=1 and leader_flag ='1' ";
 		if(union_id != null && !"".equals(union_id)){
 			hql = hql + " and union_id = '"+union_id+"'";
 		}
@@ -257,6 +255,7 @@ public class UserServlet {
 			bvo.setUser_id(vo.getUser_id());
 			bvo.setUnion_id(vo.getUnion_id());
 			bvo.setCard_id(vo.getCard_id());
+			bvo.setPerson_no(vo.getPerson_no());
 			bvo.setUser_name(vo.getUser_name());
 			bvo.setGender(vo.getGender());
 			bvo.setBirthday(vo.getBirthday());
@@ -276,6 +275,7 @@ public class UserServlet {
 			bvo.setLeader_id(vo.getLeader_id());
 			bvo.setLeader_relation(vo.getLeader_relation());
 			bvo.setRole_id(vo.getRole_id());
+			bvo.setPay_level(vo.getPay_level());
 			bvo.setHospital_id(vo.getHospital_id());
 			bvo.setValid(vo.getValid());
 			

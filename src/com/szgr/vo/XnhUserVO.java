@@ -13,7 +13,7 @@ import java.io.Serializable;
 * <p>Company: thtf yun nan Branch</p>
 * @author PdmToVoGen1.0 
 * @version 1.0
-* @create datetime 2015-09-09 15:00:54.679
+* @create datetime 2015-09-24 09:37:33.564
 */
 
 public class XnhUserVO implements Serializable, Cloneable {
@@ -54,7 +54,7 @@ public class XnhUserVO implements Serializable, Cloneable {
     private java.lang.String telephone;
     //pic
     private java.lang.String pic;
-    //org_code
+    //行政区划id
     private java.lang.String org_code;
     //leader_flag
     private java.lang.String leader_flag;

@@ -2,6 +2,7 @@ package com.szgr.framework.cache.combox;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class ComboxService {
 	@ResponseBody
 	public List<OptionObject> getCodeTableList(@RequestParam("codetablename") String codetablename,
 			@RequestParam("key") String key,@RequestParam("value") String value,@RequestParam("where") String where){
-		String sql = " select "+key+" as 'key',"+value+" as value from "+ codetablename+" where 1=1 "+where;
+		String sql = " select "+key+" as 'key',"+value+" as 'value' from "+ codetablename+" where 1=1 "+where;
 		List<OptionObject> result =  ApplicationContextUtils.getJdbcTemplate().query(sql,new DefaultRowMapper(OptionObject.class));
 		return result;
 	}
@@ -170,19 +171,34 @@ public class ComboxService {
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
 	public List<Tree> getTaxorgTree(){
 		String taxorgcode = SystemUserAccessor.getInstance().getTaxorgcode();
-//		JSONObject result = new JSONObject();
+		String authflag = SystemUserAccessor.getInstance().getAuthflag();
 		String hql = "from CodTaxorgcodeVO where 1=1 ";
-		if(taxorgcode.length()>=10 && !"00".equals(taxorgcode.substring(8, 10))){//村、街道
-			hql = hql + " and  taxorgcode ='"+taxorgcode+"'";
-		}else if(taxorgcode.length()>=10 && !"00".equals(taxorgcode.substring(6, 8))){//乡镇机关
-			hql = hql + " and (taxorgcode  in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"') or taxorgcode ='"+taxorgcode+"')";
-		}else if(taxorgcode.length()>=10 && !"00".equals(taxorgcode.substring(4, 6))){//县级机关
-			hql = hql + " and (taxorgcode  in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"') or parentId in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"')  or taxorgcode ='"+taxorgcode+"')";
-		}else if(taxorgcode.length()>=10 && !"00".equals(taxorgcode.substring(2, 4))){//州市级机关
-			hql = hql + " and (taxorgcode  in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"') or parentId in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"') or parentId in (select taxorgcode from CodTaxorgcodeVO where parentId in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"')) or taxorgcode ='"+taxorgcode+"')";
-		}else if(taxorgcode.length()>=10 && !"00".equals(taxorgcode.substring(0, 2))){//省
-			
+		if("01".equals(authflag)){
+			List ls =this.getChildorglist(taxorgcode);
+			String taxorgcodes ="";
+			for (Iterator iterator = ls.iterator(); iterator.hasNext();) {
+				CodTaxorgcodeVO orgvo = (CodTaxorgcodeVO) iterator.next();
+				taxorgcodes = taxorgcodes+"'"+orgvo.getTaxorgcode()+"',";
+			}
+			taxorgcodes = taxorgcodes.substring(0, taxorgcodes.length()-1);
+			System.out.println("taxorgcodes="+taxorgcodes);
+			hql = hql + " and taxorgcode in ("+taxorgcodes+")";
+		}else{
+			hql = hql + " and taxorgcode ='"+taxorgcode+"'";
 		}
+//		JSONObject result = new JSONObject();
+		
+//		if(taxorgcode.length()>=10 && !"00".equals(taxorgcode.substring(8, 10))){//村、街道
+//			hql = hql + " and  taxorgcode ='"+taxorgcode+"'";
+//		}else if(taxorgcode.length()>=10 && !"00".equals(taxorgcode.substring(6, 8))){//乡镇机关
+//			hql = hql + " and (taxorgcode  in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"') or taxorgcode ='"+taxorgcode+"')";
+//		}else if(taxorgcode.length()>=10 && !"00".equals(taxorgcode.substring(4, 6))){//县级机关
+//			hql = hql + " and (taxorgcode  in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"') or parentId in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"')  or taxorgcode ='"+taxorgcode+"')";
+//		}else if(taxorgcode.length()>=10 && !"00".equals(taxorgcode.substring(2, 4))){//州市级机关
+//			hql = hql + " and (taxorgcode  in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"') or parentId in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"') or parentId in (select taxorgcode from CodTaxorgcodeVO where parentId in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"')) or taxorgcode ='"+taxorgcode+"')";
+//		}else if(taxorgcode.length()>=10 && !"00".equals(taxorgcode.substring(0, 2))){//省
+//			
+//		}
 		hql = hql + "order by taxorgcode";
 		
 		Session session =  ApplicationContextUtils.getHibernateTemplate().getSessionFactory().getCurrentSession();
@@ -308,4 +324,11 @@ public class ComboxService {
 	            }
 	        }
 	    }
+	 private List getChildorglist(String taxorgcode){
+		Session session =  ApplicationContextUtils.getHibernateTemplate().getSessionFactory().getCurrentSession();
+		String hql = "from CodTaxorgcodeVO where 1=1 and valid='01' ";
+		hql = hql  + " and (taxorgcode  in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"') or parentId in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"') or parentId in (select taxorgcode from CodTaxorgcodeVO where parentId in (select taxorgcode from CodTaxorgcodeVO where parentId='"+taxorgcode+"')) or taxorgcode ='"+taxorgcode+"')";
+		List ls = session.createQuery(hql).list();
+		return ls;
+	}
 }

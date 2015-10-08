@@ -6,7 +6,9 @@
       <generator class="assigned"/>
     </id>
     <property not-null = "false"  type="java.lang.String" column="user_id" name="user_id" />
-    <property not-null = "false"  type="timestamp" column="hospital_begindate2" name="hospital_begindate2" />
+    <property not-null = "false"  type="java.lang.String" column="union_id" name="union_id" />
+    <property not-null = "false"  type="java.lang.String" column="card_id" name="card_id" />
+    <property not-null = "false"  type="timestamp" column="hospital_begindate" name="hospital_begindate" />
     <property not-null = "false"  type="timestamp" column="hospital_enddate" name="hospital_enddate" />
     <property not-null = "false"  type="java.lang.String" column="diagnose" name="diagnose" />
     <property not-null = "false"  type="java.lang.String" column="derate_type" name="derate_type" />
@@ -14,7 +16,9 @@
     <property not-null = "false"  type="java.math.BigDecimal" column="actual_amount" name="actual_amount" />
     <property not-null = "false"  type="java.math.BigDecimal" column="derate_amount" name="derate_amount" />
     <property not-null = "false"  type="java.math.BigDecimal" column="derate_sumamount" name="derate_sumamount" />
+    <property not-null = "false"  type="java.lang.String" column="doctor" name="doctor" />
     <property not-null = "false"  type="java.lang.String" column="opt_orgcode" name="opt_orgcode" />
     <property not-null = "false"  type="java.lang.String" column="opt_empcode" name="opt_empcode" />
+    <property not-null = "false"  type="timestamp" column="optdate" name="optdate" />
   </class>
 </hibernate-mapping>

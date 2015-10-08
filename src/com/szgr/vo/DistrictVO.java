@@ -12,7 +12,7 @@ import java.io.Serializable;
 * <p>Company: thtf yun nan Branch</p>
 * @author PdmToVoGen1.0 
 * @version 1.0
-* @create datetime 2015-09-09 15:00:54.679
+* @create datetime 2015-09-24 09:37:33.564
 */
 
 public class DistrictVO implements Serializable, Cloneable {

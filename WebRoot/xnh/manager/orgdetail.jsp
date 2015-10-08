@@ -55,10 +55,19 @@
 			data : orgtree,
 			valueField:'id',
 			textField:'text'
-		});			
+		});
 	});
 
 	function save(){
+		if(!$('#q-taxorgname').validatebox('isValid')){
+			$.messager.alert('提示','医疗机构名称不能为空！');
+			return;
+		}
+		var temp =$('#cc').combotree('getValue');
+		if(temp==null || temp==''){
+			$.messager.alert('提示','上级医疗机构不能为空！');
+			return;
+		}
 		var params = {};
 		var fields =$('#orgform').serializeArray();
 		$.each( fields, function(i, field){
@@ -87,7 +96,7 @@
 					<tr>
 						<td align="right">医疗机构名称：</td>
 						<td>
-							<input class="easyui-validatebox" name="taxorgname" id="union_id" style="width:200px;" data-options="required:true"/>					
+							<input class="easyui-validatebox" name="taxorgname" id="q-taxorgname" style="width:200px;" data-options="required:true"/>					
 						</td>
 						
 					</tr>

@@ -11,6 +11,8 @@
 				<value>com/szgr/vo/XnhDerateVO.hbm.xml</value>
 				<value>com/szgr/vo/KeyTablekeyvaluesVO.hbm.xml</value>
 				<value>com/szgr/vo/DistrictVO.hbm.xml</value>
+				<value>com/szgr/vo/XnhNoticeVO.hbm.xml</value>
+				<value>com/szgr/vo/XnhNotice2empVO.hbm.xml</value>
 				<!-- value>com/thtf/ynds/vo/SysCodSystemmessageVO.hbm.xml</value -->
 			</list>
 

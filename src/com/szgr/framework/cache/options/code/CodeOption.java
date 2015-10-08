@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
@@ -15,7 +12,6 @@ import org.springframework.stereotype.Component;
 import com.googlecode.ehcache.annotations.Cacheable;
 import com.googlecode.ehcache.annotations.KeyGenerator;
 import com.szgr.framework.authority.datarights.OptionObject;
-import com.thtf.ynds.vo.CodTaxorgcodeVO;
 
 @Component("com.szgr.cache.options.code.CodeOption")
 public class CodeOption implements ICodeOption {
@@ -26,7 +22,7 @@ public class CodeOption implements ICodeOption {
 	private HibernateTemplate hibernateTemplate;
 
 	/**
-	 * ÏÂÀ­ÁĞ±íµÄ»º´æÊı¾İ
+	 * ä¸‹æ‹‰åˆ—è¡¨çš„ç¼“å­˜æ•°æ®
 	 * 
 	 * @param voClass
 	 * @param where
@@ -54,9 +50,9 @@ public class CodeOption implements ICodeOption {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.warn("È¡´úÂë±í´íÎó:" + voClass.getSimpleName(), e);
+			log.warn("å–ä»£ç è¡¨é”™è¯¯:" + voClass.getSimpleName(), e);
 		}
-		log.warn("È¡´ú±í»º´æ£º" + voClass.getSimpleName() + "[" + list.size() + "]");
+		log.warn("å–ä»£è¡¨ç¼“å­˜ï¼š" + voClass.getSimpleName() + "[" + list.size() + "]");
 		return cacheList;
 	}
 
@@ -83,13 +79,13 @@ public class CodeOption implements ICodeOption {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			log.warn("È¡´úÂë±í´íÎó:" + voClass.getSimpleName(), e);
+			log.warn("å–ä»£ç è¡¨é”™è¯¯:" + voClass.getSimpleName(), e);
 		}
 		return cacheList;
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞË°Îñ»ú¹Ø´úÂë
+	 * è·å–æ‰€æœ‰ç¨åŠ¡æœºå…³ä»£ç 
 	 * 
 	 * @param voClass
 	 * @param where
@@ -104,14 +100,14 @@ public class CodeOption implements ICodeOption {
 		try {
 			list = hibernateTemplate.find(hql.toString());
 		} catch (Exception e) {
-			log.warn("È¡´úÂë±í´íÎó:CodTaxorgcodeVO", e);
+			log.warn("å–ä»£ç è¡¨é”™è¯¯:CodTaxorgcodeVO", e);
 		}
-		log.warn("È¡´ú±í»º´æ£ºCodTaxorgcodeVO" + "[" + list.size() + "]");
+		log.warn("å–ä»£è¡¨ç¼“å­˜ï¼šCodTaxorgcodeVO" + "[" + list.size() + "]");
 		return list;
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞË°ÎñÈËÔ±´úÂë
+	 * è·å–æ‰€æœ‰ç¨åŠ¡äººå‘˜ä»£ç 
 	 * 
 	 * @param voClass
 	 * @param where
@@ -126,14 +122,18 @@ public class CodeOption implements ICodeOption {
 		try {
 			list = hibernateTemplate.find(hql.toString());
 		} catch (Exception e) {
-			log.warn("È¡´úÂë±í´íÎó:CodTaxempcodeVO", e);
+			log.warn("å–ä»£ç è¡¨é”™è¯¯:CodTaxempcodeVO", e);
 		}
-		log.warn("È¡´ú±í»º´æ£ºCodTaxempcodeVO" + "[" + list.size() + "]");
+		log.warn("å–ä»£è¡¨ç¼“å­˜ï¼šCodTaxempcodeVO" + "[" + list.size() + "]");
 		return list;
 	}
 
+	
+	
 	public static void main(String[] args) {
 
 	}
+	
+	
 
 }

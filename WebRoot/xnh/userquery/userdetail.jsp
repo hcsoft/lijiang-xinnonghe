@@ -24,7 +24,7 @@
 	<script src="<%=request.getContextPath()%>/locale/easyui-lang-zh_CN.js"></script>
 	<script src="<%=request.getContextPath()%>/js/jquery.simplemodal.js"></script>
    	<script src="<%=request.getContextPath()%>/js/uploadmodal.js"></script> 
-
+	<script src="<%=request.getContextPath()%>/js/datecommon.js"></script>
 	
 </head>
 <body class="easyui-layout">  
@@ -51,7 +51,11 @@
 		   data: params,
 		   dataType: "json",
 		   success: function(jsondata){
+				jsondata.birthday=formatterDate(jsondata.birthday);
 				$('#sotremainform').form('load',jsondata);
+				for(var i=0;i<jsondata.memberlist.length;i++){
+					jsondata.memberlist[i].birthday = formatterDate(jsondata.memberlist[i].birthday);
+				}
 				$('#uniondetailgrid').datagrid('loadData',jsondata.memberlist);
 		   }
 		});
@@ -97,7 +101,7 @@
 						</td>
 						<td align="right">卡号：</td>
 						<td>
-							<input class="easyui-validatebox" name="card_id" id="card_id" style="width:200px;" onkeydown="next(this);" data-options="required:false"/>					
+							<input class="easyui-validatebox" name="card_id" id="card_id" style="width:200px;"  data-options="required:false"/>					
 						</td>
 					</tr>
 					<tr>
@@ -112,9 +116,9 @@
 						</td>
 					</tr>
 					<tr>
-						<td align="right">年龄：</td>
+						<td align="right">出生日期：</td>
 						<td>
-							<input class="easyui-numberbox" name="age" id="age" style="width:200px;" data-options="min:0,precision:0,required:false"/>				
+							<input id="birthday" class="easyui-datebox" style="width:200px" name="birthday" data-options="required:false"/>			
 						</td>
 						<td align="right">联系电话：</td>
 						<td>
@@ -126,9 +130,26 @@
 						<td>
 							<input class="easyui-validatebox" name="idnumber" id="aidnumberge" style="width:200px;" data-options="required:false"/>				
 						</td>
-						<td align="right">地址：</td>
+						<td align="right">所属行政区：</td>
 						<td>
-							<input class="easyui-validatebox" name="address" id="address" style="width:200px;" data-options="required:false"/>
+							<select id="org_code" class="easyui-combotree" style="width:200px;"  data-options="required:false" name="org_code"></select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">小组：</td>
+						<td>
+							<input class="easyui-validatebox" name="team" id="address" style="width:200px;" data-options="required:false"/>
+						</td>
+						<td align="right">人员属性：</td>
+						<td>
+							<select id="role_id" class="easyui-combobox" name="role_id" style="width:200px;" data-options="required:false" editable="false">
+								<option value="10" selected>一般人员</option>
+								<option value="20">五保</option>
+								<option value="30">低保</option>
+								<option value="40">优扰</option>
+								<option value="50">残疾</option>
+								<option value="60">残疾</option>
+							</select>
 						</td>
 					</tr>
 				</table>
@@ -144,7 +165,7 @@
 								<th data-options="field:'user_id',width:80,align:'center',hidden:'true'"></th>
 								<th data-options="field:'user_name',width:120,align:'center',editor:{type:'text',options:{required:false}}">人员名称</th>
 								<th data-options="field:'gender',width:50,align:'center',formatter:formatgender,editor:{type:'combobox',options:{valueField:'label',textField: 'name',data:genderdata}}">性别</th>
-								<th data-options="field:'age',width:50,align:'center',editor:{type:'numberbox',options:{precision:0,min:0,required:false}}">年龄</th>
+								<th data-options="field:'birthday',width:50,align:'center',editor:{type:'datebox',options:{required:false}}">出生日期</th>
 								<th data-options="field:'leader_relation',width:150,align:'center',editor:{type:'text',options:{required:false}}">与户主关系</th>
 							</tr>
 						</thead>

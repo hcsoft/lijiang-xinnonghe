@@ -71,7 +71,7 @@
 					id:'edit',
 					handler:function(){
 						var row = $('#orginfogrid').datagrid('getSelected');
-						if(row && selectindex != undefined){
+						if(row){
 							opttype='modify';
 							$('#orgwindow').window('open');
 							$('#orgwindow').window('refresh', 'orgdetail.jsp');
@@ -84,7 +84,7 @@
 					id:'del',
 					handler:function(){
 						var row = $('#orginfogrid').datagrid('getSelected');
-						if(row && selectindex != undefined){
+						if(row){
 							$.messager.confirm('提示框', '你确定要删除吗?',function(r){
 								if(r){
 									$.ajax({

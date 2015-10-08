@@ -24,7 +24,7 @@
 	<script src="<%=request.getContextPath()%>/locale/easyui-lang-zh_CN.js"></script>
 	<script src="<%=request.getContextPath()%>/js/jquery.simplemodal.js"></script>
    	<script src="<%=request.getContextPath()%>/js/uploadmodal.js"></script> 
-
+	<script src="<%=request.getContextPath()%>/js/datecommon.js"></script>
 	<script>
 	var selectindex = undefined;
 	var selectid = undefined;
@@ -35,13 +35,46 @@
 	var businesscode;
 	var businessnumber;
 	var datatype;//0：期初数据整理 1：日常业务 2：补录批复
-	var belongtocountry = new Array();
-	var belongtowns = new Array();
+	var orgdata = new Object;
+	var empdata = new Object;
+	var doctordata = new Object;
+	var orgname;
 	$(function(){
 		var paraString = location.search;     
-		var paras = paraString.split("&");   
+		var paras = paraString.split("&");  
+		empcode='<%=com.szgr.framework.authority.datarights.SystemUserAccessor.getInstance().getTaxempcode()%>';
+		orgcode='<%=com.szgr.framework.authority.datarights.SystemUserAccessor.getInstance().getTaxorgcode()%>';
 		datatype = paras[0].substr(paras[0].indexOf("=") + 1); 
-		
+			$.ajax({
+			   type: "post",
+				async:false,
+			   url: "/ComboxService/getComboxs.do",
+			   data: {codetablename:'COD_TAXORGCODE'},
+			   dataType: "json",
+			   success: function(jsondata){
+				  orgdata= jsondata;
+			   }
+			});
+		$.ajax({
+		   type: "post",
+			async:false,
+		   url: "/ComboxService/getComboxs.do",
+		   data: {codetablename:'COD_TAXEMPCODE'},
+		   dataType: "json",
+		   success: function(jsondata){
+			  empdata= jsondata;
+		   }
+		});
+		$.ajax({
+		   type: "post",
+			async:false,
+		   url: "/ComboxService/getComboxsFromTable.do",
+		   data: {codetablename:'COD_TAXEMPCODE',key:'taxempcode',value:'taxempname',where:" and taxorgcode='"+orgcode+"' and doctorflag='01'"},
+		   dataType: "json",
+		   success: function(jsondata){
+			  doctordata= jsondata;
+		   }
+		});
 		
 			$('#userinfogrid').datagrid({
 				fitColumns:'true',
@@ -58,9 +91,18 @@
 					text:'查看减免明细',
 					iconCls:'icon-tip',
 					handler:function(){
-						opttype='add';
-						$('#userwindow').window('open');
-						$('#userwindow').window('refresh', 'userdetail.jsp');
+						var row = $('#userinfogrid').datagrid('getSelected');
+						if(row){
+							$('#deratewindow').window('open');
+							if(datatype=='10'){
+								$('#deratewindow').window('refresh', 'deratedetail-10.jsp');
+							}else{
+								$('#deratewindow').window('refresh', 'deratedetail-20.jsp');
+							}
+						}else{
+							alert('请选择人员');
+						}
+						
 					}
 				}],
 				onClickRow:function(index){
@@ -113,11 +155,30 @@
 								$('#userinfogrid').datagrid('unselectAll');
 							} 
 				});
-	
+	function endEdits(){
+		var rows = $('#deratedetailgrid').datagrid('getRows');
+		for ( var i = 0; i < rows.length; i++) {
+			$('#deratedetailgrid').datagrid('endEdit', i);
+		}
+		$('#deratedetailgrid').datagrid('acceptChanges');
+	}
 	function endEditing(){  
-        if (editIndex == undefined){return true}
-        if ($('#uniondetailgrid').datagrid('validateRow', editIndex)){
-			$('#uniondetailgrid').datagrid('endEdit', editIndex);
+        if (editIndex == undefined){return true};
+		var rows = $('#deratedetailgrid').datagrid('getRows');
+		var row = rows[editIndex];
+		var begindate = $('#deratedetailgrid').datagrid('getEditor', {index:editIndex,field:'hospital_begindate'});
+		var enddate = $('#deratedetailgrid').datagrid('getEditor', {index:editIndex,field:'hospital_enddate'});
+		//var productname = $(ed.target).combobox('getText');
+		if(datatype=='20'){
+			var datea = $(begindate.target).combobox('getValue');
+			var dateb = $(enddate.target).combobox('getValue');
+			if(!dateCompare(datea,dateb)){
+				alert('起日期不能大于止日期!');
+				return;
+			}
+		}
+        if ($('#deratedetailgrid').datagrid('validateRow', editIndex)){
+			$('#deratedetailgrid').datagrid('endEdit', editIndex);
             editIndex = undefined;  
             return true;  
         } else {  
@@ -133,7 +194,7 @@
 			//$('#userinfogrid').datagrid({
 			//	url:'/InitGroundServlet/getlandstoreinfo.do'
 			//});
-			params.datatype=datatype;
+			//params.datatype=datatype;
 			$('#userinfogrid').datagrid('loadData',{total:0,rows:[]});
 			var opts = $('#userinfogrid').datagrid('options');
 			opts.url = '<%=request.getContextPath()%>/Derate/getuserlist.do';
@@ -146,8 +207,35 @@
 			$('#userquerywindow').window('close');
 			
 		}
-
-
+	function formatorg(value,row,index){
+		for(var i=0; i<orgdata.length; i++){
+			if (orgdata[i].key == value) return orgdata[i].value;
+		}
+		return value;
+	}
+	function formatemp(value,row,index){
+		for(var i=0; i<empdata.length; i++){
+			if (empdata[i].key == value) return empdata[i].value;
+		}
+		return value;
+	}
+	$.extend($.fn.validatebox.defaults.rules, {   
+		datecheck: {   
+			validator: function(value){ 
+				return /^((((1[6-9]|[2-9]\d)\d{2})-(0?[13578]|1[02])-(0?[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})-(0?[13456789]|1[012])-(0?[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})-0?2-(0?[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))-0?2-29-))$/.test(value);
+			},   
+			message: '时间格式不合法，格式为YYYY-MM-DD 如：2013-01-03'  
+		},
+		isAfter: {
+			validator: function(value, param){
+				var dateA = $.fn.datebox.defaults.parser(value);
+				var dateB = $.fn.datebox.defaults.parser($(param[0]).datebox('getValue'));
+				alert(dateA+"------"+dateB);
+				return dateA<dateB;
+				},
+			 message: '起日期不能大于使用止日期！'
+		}
+	});
 	</script>
 </head>
 <body>
@@ -176,10 +264,11 @@
 										if(value=='02'){
 											return '女';
 										}
+										return value;
 									},
 									
 									editor:{type:'validatebox'}">性别</th>
-									<th data-options="field:'age',width:60,align:'center',editor:{type:'validatebox'}">年龄</th>
+									<th data-options="field:'birthday',width:60,align:'center',editor:{type:'validatebox'}">出生日期</th>
 									<%--<th data-options="field:'role_id',width:100,align:'left',editor:{type:'validatebox'}">角色</th>
 									<th data-options="field:'hospital_id',width:60,align:'center',editor:{type:'validatebox'}">所属单元</th>--%>
 									<th data-options="field:'valid',width:100,align:'left',formatter:function(value,row,index){
@@ -231,65 +320,10 @@
 			</div>
 		</div>
 	</div>
-	<!-- <div id="groundstorageeditwindow" class="easyui-window" data-options="closed:true,modal:true,title:'土地收储批复',collapsible:false,minimizable:false,maximizable:false,closable:true" style="width:940px;height:300px;">
-		<div class="easyui-panel" title="" style="width:900px;">
-			<form id="groundstorageeditform" method="post">
-				<table id="narjcxx" width="100%" class="table table-bordered">
-					<input id="landstoreid"  type="hidden" name="landstoreid"/>	
-					<tr>
-						<td align="right">批复类型：</td>
-						<td>
-							<input class="easyui-combobox" name="approvetype" id="approvetype" data-options="disabled:false,panelWidth:300,panelHeight:200"/>					
-						</td>
-						<td align="right">批复名称：</td>
-						<td>
-							<input class="easyui-validatebox" name="name" id="name"/>					
-						</td>
-					</tr>
-					<tr>
-						<td align="right">厅级批准文号：</td>
-						<td><input id="approvenumber" class="easyui-validatebox" type="text" name="approvenumber"/></td>
-						<td align="right">市级批准文号：</td>
-						<td>
-							<input id="approvenumbercity" class="easyui-validatebox" type="text" name="approvenumbercity"/>
-						</td>
-					</tr>
-					<tr>
-						<td align="right">纳税人计算机编码：</td>
-						<td>
-							<input class="easyui-validatebox" name="taxpayer" id="taxpayer"/>					
-						</td>
-						<td align="right">纳税人计算机名称：</td>
-						<td>
-							<input class="easyui-validatebox" name="taxpayername" id="taxpayername"/>					
-						</td>
-					</tr>
-					<tr>
-						<td align="right">批复日期：</td>
-						<td colspan="3">
-							<input id="approvedates" class="easyui-datebox" name="approvedates"/>
-						</td>
-					</tr>
-					
-				</table>
-			</form>
-			<div style="text-align:center;padding:5px;">
-				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="quereyreg()">税务登记查询</a>
-				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="save()">保存</a>
-			</div>
-		</div>
-	</div> -->
-	<!-- <div id="groundstoragedetailwindow" class="easyui-window" data-options="closed:true,modal:true,title:'土地收储批复明细',collapsible:false,minimizable:false,maximizable:false,closable:false" style="width:800px;height:400px;">
-	<table id="uniondetailgrid"></table>
-	</div> -->
-	<div id="reginfowindow" class="easyui-window" data-options="closed:true,modal:true,title:'纳税人登记信息',collapsible:false,minimizable:false,maximizable:false,closable:true" style="width:620px;height:470px;">
+	
+	<div id="deratewindow" class="easyui-window" data-options="closed:true,modal:true,title:'减免信息',collapsible:false,minimizable:false,maximizable:false,closable:true,resizable:false" style="width:1000px;height:550px;">
 	</div>
-	<div id="userwindow" class="easyui-window" data-options="closed:true,modal:true,title:'新农合卡登记信息',collapsible:false,minimizable:false,maximizable:false,closable:true,resizable:false" style="width:1000px;height:500px;">
-	</div>
-	<!-- <div id="groundstorageaddwindow" class="easyui-window" data-options="closed:true,modal:true,title:'土地收储批复新增',collapsible:false,minimizable:false,maximizable:false,closable:true" style="width:940px;height:200px;">
-	</div> -->
-	<!-- <div id="addtdxxwindow" class="easyui-window" data-options="closed:true,modal:true,title:'土地信息',collapsible:false,minimizable:false,maximizable:false,closable:true" style="width:940px;height:500px;">
-	</div> -->
+	
 
 </body>
 </html>

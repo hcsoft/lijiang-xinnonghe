@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE hibernate-mapping PUBLIC "hibernate-mapping" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="xnh_notice2emp" name="com.szgr.vo.XnhNotice2empVO">
+    <id type="java.lang.String" column="serialno" name="serialno" >
+      <generator class="assigned"/>
+    </id>
+    <property not-null = "false"  type="java.lang.String" column="noticeid" name="noticeid" />
+    <property not-null = "false"  type="java.lang.String" column="empcode" name="empcode" />
+    <property not-null = "false"  type="java.lang.String" column="readflag" name="readflag" />
+  </class>
+</hibernate-mapping>

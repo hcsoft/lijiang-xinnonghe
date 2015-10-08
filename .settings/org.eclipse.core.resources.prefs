@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebRoot/login/login.jsp=UTF-8
 encoding//WebRoot/login/login.php=UTF-8
+encoding//src/com/szgr/framework/authority/datarights/SystemUserAccessor.java=UTF-8
 encoding//src/com/szgr/xnh/user/UserServlet.java=UTF-8
 encoding/<project>=UTF-8

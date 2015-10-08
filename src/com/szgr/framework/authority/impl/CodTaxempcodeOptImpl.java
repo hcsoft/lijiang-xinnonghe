@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -37,12 +36,12 @@ public class CodTaxempcodeOptImpl {
 	private static Map cachedMap = new HashMap();
 
 	/**
-	 * »º´æµÄËùÓĞ´úÂëÊı¾İµÄList
+	 * ç¼“å­˜çš„æ‰€æœ‰ä»£ç æ•°æ®çš„List
 	 */
 	private static List cachedList = new ArrayList();
 
 	/**
-	 * »ñµÃËùÓĞµÄË°ÎñÈËÔ±´úÂë
+	 * è·å¾—æ‰€æœ‰çš„ç¨åŠ¡äººå‘˜ä»£ç 
 	 * 
 	 * @return Collection
 	 */
@@ -55,7 +54,7 @@ public class CodTaxempcodeOptImpl {
 	}
 
 	/**
-	 * ´ÓÊı¾İ¿âÖĞ³õÊ¼×°ÔØ´úÂë±í
+	 * ä»æ•°æ®åº“ä¸­åˆå§‹è£…è½½ä»£ç è¡¨
 	 * 
 	 * @return Collection
 	 */
@@ -67,7 +66,7 @@ public class CodTaxempcodeOptImpl {
 	}
 
 	/**
-	 * ´Ó»º´æÖĞÈ¡ËùÓĞË°ÎñÈËÔ±
+	 * ä»ç¼“å­˜ä¸­å–æ‰€æœ‰ç¨åŠ¡äººå‘˜
 	 * 
 	 * @return Collection
 	 */
@@ -77,7 +76,7 @@ public class CodTaxempcodeOptImpl {
 	}
 
 	/**
-	 * getEmpOptionsByOrgCode ¸ù¾İµØË°»ú¹Ø»ò²¿ÃÅ»ñµÃË°Îñ¹ÜÀíÔ±Ñ¡ÏîÁĞ±í ¹©Áª¶¯Ê¹ÓÃ
+	 * getEmpOptionsByOrgCode æ ¹æ®åœ°ç¨æœºå…³æˆ–éƒ¨é—¨è·å¾—ç¨åŠ¡ç®¡ç†å‘˜é€‰é¡¹åˆ—è¡¨ ä¾›è”åŠ¨ä½¿ç”¨
 	 * 
 	 * @param orgCode
 	 *            String
@@ -88,25 +87,25 @@ public class CodTaxempcodeOptImpl {
 	}
 
 	/**
-	 * getEmpOptionsByOrgCode ¸ù¾İµØË°»ú¹Ø»ò²¿ÃÅ»ñµÃºÍÈËÔ±ÀàĞÍ»ñÈ¡Ë°ÎñÈËÔ±´úÂë(»ú¹ØÖ±Êô) ¹©Áª¶¯Ê¹ÓÃµÄ·½·¨
+	 * getEmpOptionsByOrgCode æ ¹æ®åœ°ç¨æœºå…³æˆ–éƒ¨é—¨è·å¾—å’Œäººå‘˜ç±»å‹è·å–ç¨åŠ¡äººå‘˜ä»£ç (æœºå…³ç›´å±) ä¾›è”åŠ¨ä½¿ç”¨çš„æ–¹æ³•
 	 * 
 	 * @param orgCode
-	 *            String ËùÊô»ú¹Ø´úÂë
+	 *            String æ‰€å±æœºå…³ä»£ç 
 	 * @param emptype
-	 *            String Ë°ÎñÈËÔ±ÀàĞÍ£¬¼ûpubconstants³£Á¿¶¨Òå emptype Îª£î£õ£ì£ìÊ±Ñ¡ÔñËùÓĞÀà±ğµÄË°ÎñÈËÔ±
+	 *            String ç¨åŠ¡äººå‘˜ç±»å‹ï¼Œè§pubconstantså¸¸é‡å®šä¹‰ emptype ä¸ºï½ï½•ï½Œï½Œæ—¶é€‰æ‹©æ‰€æœ‰ç±»åˆ«çš„ç¨åŠ¡äººå‘˜
 	 * @return Collection add by liu wanfu
 	 */
 	public Collection getEmpOptionByOrgCode(String orgCode, String emptype) {
 		List list = new ArrayList();
 		// Collection list = new ArrayList();
-		// ¶ÔÓ¦ÓÚÈ¡ÏûÑ¡ÔñÏØÇø¼¶µØË°»ú¹Ø
+		// å¯¹åº”äºå–æ¶ˆé€‰æ‹©å¿åŒºçº§åœ°ç¨æœºå…³
 		if ("".equals(orgCode)) {
-			list.add(new OptionObject("", "ÇëÏÈÑ¡ÔñµØË°»ú¹Ø²¿ÃÅ", new CodTaxempcodeVO()));
+			list.add(new OptionObject("", "è¯·å…ˆé€‰æ‹©åœ°ç¨æœºå…³éƒ¨é—¨", new CodTaxempcodeVO()));
 			return list;
 		}
 
 		list.add(new OptionObject("", " ", new CodTaxempcodeVO()));
-		// Èç¹ûË°ÎñÈËÔ±ÀàĞÍÎª¿Õ£¬·µ»ØËùÓĞµÄË°ÎñÈËÔ±
+		// å¦‚æœç¨åŠ¡äººå‘˜ç±»å‹ä¸ºç©ºï¼Œè¿”å›æ‰€æœ‰çš„ç¨åŠ¡äººå‘˜
 		if (TypeChecker.isEmpty(emptype)) {
 			Iterator iter = cachedList.iterator();
 			iter.next();
@@ -117,7 +116,7 @@ public class CodTaxempcodeOptImpl {
 					list.add(optionObj);
 				}
 			}
-		} else {// Ë°ÎñÈËÔ±ÀàĞÍ²»Îª¿Õ£¬¸ù¾İË°ÎñÈËÔ±ÀàĞÍ½øĞĞ¹ıÂË
+		} else {// ç¨åŠ¡äººå‘˜ç±»å‹ä¸ä¸ºç©ºï¼Œæ ¹æ®ç¨åŠ¡äººå‘˜ç±»å‹è¿›è¡Œè¿‡æ»¤
 			Iterator iter = getTaxEmpCodeByEmpType(emptype).iterator();
 			// iter.next();
 			while (iter.hasNext()) {
@@ -143,19 +142,19 @@ public class CodTaxempcodeOptImpl {
 	}
 
 	/**
-	 * getEmpOptionsUnderOrgCode ¸ù¾İµØË°»ú¹Ø»ò²¿ÃÅ»ñµÃºÍÈËÔ±ÀàĞÍ»ñÈ¡Ë°ÎñÈËÔ±´úÂë(°üº¬ÏÂÊô»ú¹ØµÄÈËÔ±)
-	 * ¹©³õÊ¼»¯ÏÂÀ­ÁĞ±íÊ¹ÓÃµÄ·½·¨
+	 * getEmpOptionsUnderOrgCode æ ¹æ®åœ°ç¨æœºå…³æˆ–éƒ¨é—¨è·å¾—å’Œäººå‘˜ç±»å‹è·å–ç¨åŠ¡äººå‘˜ä»£ç (åŒ…å«ä¸‹å±æœºå…³çš„äººå‘˜)
+	 * ä¾›åˆå§‹åŒ–ä¸‹æ‹‰åˆ—è¡¨ä½¿ç”¨çš„æ–¹æ³•
 	 * 
 	 * @param orgCode
-	 *            String ËùÊô»ú¹Ø´úÂë
+	 *            String æ‰€å±æœºå…³ä»£ç 
 	 * @param emptype
-	 *            String Ë°ÎñÈËÔ±ÀàĞÍ£¬¼ûpubconstants³£Á¿¶¨Òå emptype Îª£î£õ£ì£ìÊ±Ñ¡ÔñËùÓĞÀà±ğµÄË°ÎñÈËÔ±
+	 *            String ç¨åŠ¡äººå‘˜ç±»å‹ï¼Œè§pubconstantså¸¸é‡å®šä¹‰ emptype ä¸ºï½ï½•ï½Œï½Œæ—¶é€‰æ‹©æ‰€æœ‰ç±»åˆ«çš„ç¨åŠ¡äººå‘˜
 	 * @return Collection add by liu wanfu
 	 */
 	public Collection getEmpOptionUnderOrgCode(String orgCode, String emptype) {
 		List list = new ArrayList();
 		// Collection list = new ArrayList();
-		// ¶ÔÓ¦ÓÚÎ´Ñ¡ÔñµØË°»ú¹Ø²¿ÃÅ or ²¿ÃÅ´úÂëÓĞ´í
+		// å¯¹åº”äºæœªé€‰æ‹©åœ°ç¨æœºå…³éƒ¨é—¨ or éƒ¨é—¨ä»£ç æœ‰é”™
 		if (TypeChecker.isEmpty(orgCode) || orgCode.length() != 10) {
 			list.add(new OptionObject("", "          ", new CodTaxempcodeVO()));
 			return list;
@@ -167,7 +166,7 @@ public class CodTaxempcodeOptImpl {
 		}
 
 		list.add(new OptionObject("", " ", new CodTaxempcodeVO()));
-		// Èç¹ûË°ÎñÈËÔ±ÀàĞÍÎª¿Õ£¬·µ»ØËùÓĞµÄË°ÎñÈËÔ±
+		// å¦‚æœç¨åŠ¡äººå‘˜ç±»å‹ä¸ºç©ºï¼Œè¿”å›æ‰€æœ‰çš„ç¨åŠ¡äººå‘˜
 		if (TypeChecker.isEmpty(emptype)) {
 			Iterator iter = cachedList.iterator();
 			iter.next();
@@ -180,7 +179,7 @@ public class CodTaxempcodeOptImpl {
 					list.add(optionObj);
 				}
 			}
-		} else {// Ë°ÎñÈËÔ±ÀàĞÍ²»Îª¿Õ£¬¸ù¾İË°ÎñÈËÔ±ÀàĞÍ½øĞĞ¹ıÂË
+		} else {// ç¨åŠ¡äººå‘˜ç±»å‹ä¸ä¸ºç©ºï¼Œæ ¹æ®ç¨åŠ¡äººå‘˜ç±»å‹è¿›è¡Œè¿‡æ»¤
 			Iterator iter = getTaxEmpCodeByEmpType(emptype).iterator();
 			// iter.next();
 			while (iter.hasNext()) {
@@ -208,14 +207,14 @@ public class CodTaxempcodeOptImpl {
 	}
 
 	/**
-	 * ¸ù¾İÈËÔ±ÀàĞÍ»ñÈ¡Ë°ÎñÈËÔ± ¹«ÓÃ·½·¨£¬²»´ø²»ÏŞÖµ·½·¨
+	 * æ ¹æ®äººå‘˜ç±»å‹è·å–ç¨åŠ¡äººå‘˜ å…¬ç”¨æ–¹æ³•ï¼Œä¸å¸¦ä¸é™å€¼æ–¹æ³•
 	 * 
 	 * @param emptype
-	 *            String ÈËÔ±ÀàĞÍ´úÂë£¬ÔÚpubConstantsÖĞ¶¨Òå add by liuwanfu
+	 *            String äººå‘˜ç±»å‹ä»£ç ï¼Œåœ¨pubConstantsä¸­å®šä¹‰ add by liuwanfu
 	 */
 	public Collection getTaxEmpCodeByEmpType(String emptype) {
 		List templist = new ArrayList();
-		// ÈËÔ±ÀàĞÍÎª¿Õ£¬Êä³öËùÓĞµÄÈËÔ±´úÂë
+		// äººå‘˜ç±»å‹ä¸ºç©ºï¼Œè¾“å‡ºæ‰€æœ‰çš„äººå‘˜ä»£ç 
 		if (TypeChecker.isEmpty(emptype)) {
 			Iterator iter = cachedList.iterator();
 			iter.next();
@@ -228,46 +227,47 @@ public class CodTaxempcodeOptImpl {
 			while (iter.hasNext()) {
 				OptionObject optionObj = (OptionObject) iter.next();
 				CodTaxempcodeVO vo = (CodTaxempcodeVO) optionObj.getObject();
-				if (PubConstants.TAXEMPCODE_AUTH_TYPE.equals(emptype)
-						&& PubConstants.TAXEMPCODE_AUTH_FLAG.equals(vo
-								.getAuthflag())) {
-					templist.add(optionObj);
-				} else if (PubConstants.TAXEMPCODE_LEVY_TYPE.equals(emptype)
-						&& PubConstants.TAXEMPCODE_LEVY_FLAG.equals(vo
-								.getLevyflag())) {
-					templist.add(optionObj);
-				} else if (PubConstants.TAXEMPCODE_TAXMANAGER_TYPE
-						.equals(emptype)
-						&& PubConstants.TAXEMPCODE_TAXMANAGER_FLAG.equals(vo
-								.getTaxmanageflag())) {
-					templist.add(optionObj);
-				}
+//				if (PubConstants.TAXEMPCODE_AUTH_TYPE.equals(emptype)
+//						&& PubConstants.TAXEMPCODE_AUTH_FLAG.equals(vo
+//								.getAuthflag())) {
+//					templist.add(optionObj);
+//				} else if (PubConstants.TAXEMPCODE_LEVY_TYPE.equals(emptype)
+//						&& PubConstants.TAXEMPCODE_LEVY_FLAG.equals(vo
+//								.getLevyflag())) {
+//					templist.add(optionObj);
+//				} else if (PubConstants.TAXEMPCODE_TAXMANAGER_TYPE
+//						.equals(emptype)
+//						&& PubConstants.TAXEMPCODE_TAXMANAGER_FLAG.equals(vo
+//								.getTaxmanageflag())) {
+//					templist.add(optionObj);
+//				}
+				templist.add(optionObj);
 			}
 		}
 		return templist;
 	}
 
 	/**
-	 * ¸ù¾İÓÃ»§µÄÊı¾İÈ¨ÏŞºÍË°ÎñÈËÔ±ÀàĞÍ»ñÈ¡Ë°ÎñÈËÔ±´úÂë£®
+	 * æ ¹æ®ç”¨æˆ·çš„æ•°æ®æƒé™å’Œç¨åŠ¡äººå‘˜ç±»å‹è·å–ç¨åŠ¡äººå‘˜ä»£ç ï¼
 	 * 
 	 * @param emptype
 	 *            String add by liuwanfu
 	 */
 	public Collection getTaxEmpCodeWithDataRigths(String emptype) {
-		// »ñÈ¡ÏÂÀ­Êı¾İÈ¨ÏŞ
+		// è·å–ä¸‹æ‹‰æ•°æ®æƒé™
 		String[] datarightsarray = SystemUserAccessor.getInstance()
 				.getCurrentModuleSelectRight();
 
 		List reslist = new ArrayList();
 		HashMap resmap = new HashMap();
 		List typefilterlist = (List) this.getTaxEmpCodeByEmpType(emptype);
-		// Ê¡¾ÖÈ¨ÏŞ·µ»ØËùÓĞ·ûºÏÀàĞÍµÄË°ÎñÈËÔ±
+		// çœå±€æƒé™è¿”å›æ‰€æœ‰ç¬¦åˆç±»å‹çš„ç¨åŠ¡äººå‘˜
 		if (datarightsarray == null) {
 			reslist = (List) typefilterlist;
 			reslist.add(0, new OptionObject("", " ", new CodTaxempcodeVO()));
 			return reslist;
 		}
-		// È¨ÏŞ²»Îª¿Õ£¬¸ù¾İÈ¨ÏŞ¶ÔÒÑ¾­¸ù¾İÀàĞÍ½øĞĞ¹ıÂËµÄÁĞ±í½øĞĞ²Ù×÷
+		// æƒé™ä¸ä¸ºç©ºï¼Œæ ¹æ®æƒé™å¯¹å·²ç»æ ¹æ®ç±»å‹è¿›è¡Œè¿‡æ»¤çš„åˆ—è¡¨è¿›è¡Œæ“ä½œ
 		for (int a = 0; a < datarightsarray.length; a++) {
 			String rightstr = datarightsarray[a];
 			log.debug("emptype:" + emptype);
@@ -285,21 +285,21 @@ public class CodTaxempcodeOptImpl {
 				}
 			}
 		}
-		// É¾³ı½á¹û¼¯ÖĞµÄÖØ¸´¶ÔÏó
+		// åˆ é™¤ç»“æœé›†ä¸­çš„é‡å¤å¯¹è±¡
 		reslist = ListUtil.getSortedListfromMap(resmap);
 		reslist.add(0, new OptionObject("", " ", new CodTaxempcodeVO()));
-		/** @todo ¶ÁÈ¡²ÎÊıÅĞ¶Ïµ±Ç°ÓÃ»§ÊÇ·ñÊÇ×¨¹ÜÔ± */
+		/** @todo è¯»å–å‚æ•°åˆ¤æ–­å½“å‰ç”¨æˆ·æ˜¯å¦æ˜¯ä¸“ç®¡å‘˜ */
 
 		return reslist;
 
 	}
 
 	/**
-	 * ¸ù¾İÈËÔ±´úÂë»ñÈ¡ÈËÔ±¶ÔÏó
+	 * æ ¹æ®äººå‘˜ä»£ç è·å–äººå‘˜å¯¹è±¡
 	 * 
 	 * @param taxempcode
-	 *            String ÈËÔ±´úÂë
-	 * @return CodTaxempcodeVO ÈËÔ±¶ÔÏó
+	 *            String äººå‘˜ä»£ç 
+	 * @return CodTaxempcodeVO äººå‘˜å¯¹è±¡
 	 */
 	public static CodTaxempcodeVO getTaxEmpTaxempcodeVOByEmpCode(
 			String taxempcode) {

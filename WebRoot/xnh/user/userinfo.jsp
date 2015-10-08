@@ -199,9 +199,7 @@
 			
 		}
 
-	function formatterDate(value,row,index){
-			return formatDatebox(value);
-	}
+	
 	</script>
 </head>
 <body>
@@ -233,7 +231,7 @@
 									},
 									
 									editor:{type:'validatebox'}">性别</th>
-									<th data-options="field:'age',width:60,align:'center',editor:{type:'validatebox'}">年龄</th>
+									<th data-options="field:'birthday',width:60,align:'center',editor:{type:'validatebox'}">出生日期</th>
 									<%--<th data-options="field:'role_id',width:100,align:'left',editor:{type:'validatebox'}">角色</th>
 									<th data-options="field:'hospital_id',width:60,align:'center',editor:{type:'validatebox'}">所属单元</th>--%>
 									<th data-options="field:'valid',width:100,align:'left',formatter:function(value,row,index){

@@ -9,120 +9,120 @@ public interface PubConstants {
     public static final String VALID_STATUS = "01";
     public static final String INVALID_STATUS = "00";
 
-    // Ë°Îñ»ú¹Ø¼¶±ğ
-    public static String TAXORGCLASS_PRO = "01"; //Ê¡¼¶Ë°Îñ»ú¹Ø
-    public static String TAXORGCLASS_SUP = "02"; //ÖİÊĞ¼¶Ë°Îñ»ú¹Ø
-    public static String TAXORGCLASS_ORG = "03"; //ÏØÇø¼¶»ú¹Ø
-    public static String TAXORGCLASS_DEPT = "04"; //·Ö¾ÖËùË°Îñ»ú¹Ø
+    // ç¨åŠ¡æœºå…³çº§åˆ«
+    public static String TAXORGCLASS_PRO = "01"; //çœçº§ç¨åŠ¡æœºå…³
+    public static String TAXORGCLASS_SUP = "02"; //å·å¸‚çº§ç¨åŠ¡æœºå…³
+    public static String TAXORGCLASS_ORG = "03"; //å¿åŒºçº§æœºå…³
+    public static String TAXORGCLASS_DEPT = "04"; //åˆ†å±€æ‰€ç¨åŠ¡æœºå…³
 
-    // Ë°Îñ»ú¹ØÀà±ğ
-    public static String TAXORGANIZATION = "01"; //Ôİ£ºË°Îñ»ú¹Ø£¨Çø±ğÓÚË°Îñ»ü²é£©
+    // ç¨åŠ¡æœºå…³ç±»åˆ«
+    public static String TAXORGANIZATION = "01"; //æš‚ï¼šç¨åŠ¡æœºå…³ï¼ˆåŒºåˆ«äºç¨åŠ¡ç¨½æŸ¥ï¼‰
 
-    // Ë°Îñ»ú¹ØÃû³ÆÀàĞÍ£¨³¤¶È£©£¨taxname or shortname£©
-    //Ë°Îñ»ú¹Ø¼ò³Æ
-    public static String TAXORGNAME_SHORT = "short"; //¶ÔÓ¦taxorgshortname
-    //Ë°Îñ»ú¹ØÈ«³Æ
-    public static String TAXORGNAME_LONG = "long"; //¶ÔÓ¦taxorgname
+    // ç¨åŠ¡æœºå…³åç§°ç±»å‹ï¼ˆé•¿åº¦ï¼‰ï¼ˆtaxname or shortnameï¼‰
+    //ç¨åŠ¡æœºå…³ç®€ç§°
+    public static String TAXORGNAME_SHORT = "short"; //å¯¹åº”taxorgshortname
+    //ç¨åŠ¡æœºå…³å…¨ç§°
+    public static String TAXORGNAME_LONG = "long"; //å¯¹åº”taxorgname
 
-    // Ë°Îñ»ú¹Ø´úÂëÓĞĞ§Î»³¤¶È
+    // ç¨åŠ¡æœºå…³ä»£ç æœ‰æ•ˆä½é•¿åº¦
     public static int TAXORGLENGTH_SUP = 4;
     public static int TAXORGLENGTH_ORG = 6;
     public static int TAXORGLENGTH_DEPT = 8;
 
-    //½Úµã±êÊ¶£ºnode  ¡°00¡±¸ù½Úµã ¡°01¡±Ò¶×Ó½Úµã
+    //èŠ‚ç‚¹æ ‡è¯†ï¼šnode  â€œ00â€æ ¹èŠ‚ç‚¹ â€œ01â€å¶å­èŠ‚ç‚¹
     public static final String SYS_NODE_ROOT = "00";
     public static final String SYS_NODE_LEAF = "01";
 
-//  //×¢²áÀàĞÍ´úÂë½Úµã±êÊ¶: "0"¸ù½Úµã  "1"Ò¶×Ó½Úµã
+//  //æ³¨å†Œç±»å‹ä»£ç èŠ‚ç‚¹æ ‡è¯†: "0"æ ¹èŠ‚ç‚¹  "1"å¶å­èŠ‚ç‚¹
 //  public static final String ECONATURE_NODE_ROOT = "0";
 //  public static final String ECONATURE_NODE_LEAF = "1";
 
-    //Ë°ÖÖË°Ä¿´úÂë½Úµã±êÊ¶: "99"Ë°ÖÖ  "00"Ë°Ä¿
+    //ç¨ç§ç¨ç›®ä»£ç èŠ‚ç‚¹æ ‡è¯†: "99"ç¨ç§  "00"ç¨ç›®
     public static final String TAXCODE_ROOT = "99";
     public static final String TAXCODE_LEAF = "00";
-    //·ÑÖÖ·ÑÄ¿´úÂë½Úµã±êÊ¶: "00"·ÑÖÖÀà  "01"·ÑÖÖ´úÂë  "02"·ÑÄ¿´úÂë
+    //è´¹ç§è´¹ç›®ä»£ç èŠ‚ç‚¹æ ‡è¯†: "00"è´¹ç§ç±»  "01"è´¹ç§ä»£ç   "02"è´¹ç›®ä»£ç 
     public static final String FEETYPECODE_TYPE = "00";
     public static final String FEETYPECODE_FEE = "01";
     public static final String FEETYPECODE_FEEITEM = "02";
-    //(·Ñ)µ¥Î»ÀàĞÍ´úÂë½Úµã±êÊ¶: "00"  "01"
+    //(è´¹)å•ä½ç±»å‹ä»£ç èŠ‚ç‚¹æ ‡è¯†: "00"  "01"
     public static final String FPROPERTYPECODE_FEEITEMTYPE = "00";
     public static final String FPROPERTYPECODE_TYPE = "01";
 
 
-    //×Ö·ûĞÍ¿ÕÖµ£º´æ´¢µã(.)
+    //å­—ç¬¦å‹ç©ºå€¼ï¼šå­˜å‚¨ç‚¹(.)
     public static final String SYS_CHAR_NULL = ".";
 
-    //ÊıÖµĞÍ¿ÕÖµ£º´æ´¢0.00
+    //æ•°å€¼å‹ç©ºå€¼ï¼šå­˜å‚¨0.00
     public static double SYS_DECIMAL_NULL = 0.00;
 
 
-    //ÄÉË°ÈË×´Ì¬±êÊ¶
+    //çº³ç¨äººçŠ¶æ€æ ‡è¯†
     public static String TAXPAYERSTATUS_NOMAL = "01";
 
-    //ÄÉË°ÈË»ü²é×´Ì¬
+    //çº³ç¨äººç¨½æŸ¥çŠ¶æ€
     public static String UNTAXPAYERSAUDIT_FLAG = "00";
     public static String TAXPAYERSAUDIT_FLAG = "01";
-    //ÄÉË°ÈË"×Ô¿ª»õÔË·¢Æ±"±êÊ¶
+    //çº³ç¨äºº"è‡ªå¼€è´§è¿å‘ç¥¨"æ ‡è¯†
     public static String TAXPAYER_FREIGHTSELFFLAG = "01";
-    //ÄÉË°ÈË"´ú¿ª»õÔË·¢Æ±"±êÊ¶
+    //çº³ç¨äºº"ä»£å¼€è´§è¿å‘ç¥¨"æ ‡è¯†
     public static String TAXPAYER_FREIGHTSUPPLYFLAG = "01";
-    //Í£ÒµÍêÆı±êÖ¾
+    //åœä¸šå®Œè®«æ ‡å¿—
     public static String STOP_FLAG = "00";
     public static String STOPEND_FLAG = "01";
-    //¸´ÒµÍêÆı±êÖ¾
+    //å¤ä¸šå®Œè®«æ ‡å¿—
     public static String RESTORE_FLAG = "00";
     public static String RESTOREEND_FLAG = "01";
-    //×¢ÏúÍêÆı±êÖ¾
+    //æ³¨é”€å®Œè®«æ ‡å¿—
     public static String CANCEL_FLAG = "00";
     public static String CANCELEND_FLAG = "01";
 
-    //ÄÉË°ÈË¼ì²é×´Ì¬
+    //çº³ç¨äººæ£€æŸ¥çŠ¶æ€
     public static String UNTAXPAYERSCHECK_FLAG = "00";
     public static String TAXPAYERSCHECK_FLAG = "01";
 
     /*************add by liuwanfu begain**************/
-    //Ë°ÎñÈËÔ±ÀàĞÍ
-    //Áìµ¼
+    //ç¨åŠ¡äººå‘˜ç±»å‹
+    //é¢†å¯¼
     public static String TAXEMPCODE_AUTH_TYPE = "10";
-    //Õ÷ÊÕÈËÔ±
+    //å¾æ”¶äººå‘˜
     public static String TAXEMPCODE_LEVY_TYPE = "20";
-    //Ë°ÊÕ¹ÜÀíÔ±
+    //ç¨æ”¶ç®¡ç†å‘˜
     public static String TAXEMPCODE_TAXMANAGER_TYPE = "30";
 
 
-    //Ë°ÎñÈËÔ±±êÊ¶
-    //Áìµ¼±êÊ¶
+    //ç¨åŠ¡äººå‘˜æ ‡è¯†
+    //é¢†å¯¼æ ‡è¯†
     public static String TAXEMPCODE_AUTH_FLAG = "01";
-    //Õ÷ÊÕÈËÔ±±êÊ¶
+    //å¾æ”¶äººå‘˜æ ‡è¯†
     public static String TAXEMPCODE_LEVY_FLAG = "01";
-    //×¨¹ÜÔ±±êÊ¶
+    //ä¸“ç®¡å‘˜æ ‡è¯†
     public static String TAXEMPCODE_TAXMANAGER_FLAG = "01";
 
     /*************add by liuwanfu end**************/
 
     /*
-     * ÒÔÉÏÊÇcacheÊ¹ÓÃµÄ³£Á¿ END
+     * ä»¥ä¸Šæ˜¯cacheä½¿ç”¨çš„å¸¸é‡ END
      */
     /**
-     * ´¦·£ĞÅÏ¢±í²Ù×÷±êÊ¶£¬µÇ¼ÇÓë»ü²é¹²ÓÃ
+     * å¤„ç½šä¿¡æ¯è¡¨æ“ä½œæ ‡è¯†ï¼Œç™»è®°ä¸ç¨½æŸ¥å…±ç”¨
      */
-    //µÇ¼Ç±êÊ¶Îª10
+    //ç™»è®°æ ‡è¯†ä¸º10
     public static String MGR_PUNISHINFO_OPERATEFLAG_TAXREG = "10";
-    //»ü²é±êÊ¶Îª20
+    //ç¨½æŸ¥æ ‡è¯†ä¸º20
     public static String MGR_PUNISHINFO_OPERATEFLAG_TAXAUDIT = "20";
 
 
     /**
-     * ÉèÁ¢µÇ¼Ç×´Ì¬±êÊ¶£¬ÏµÍ³¼¶³£Á¿
-     * byÔøÖÇ
+     * è®¾ç«‹ç™»è®°çŠ¶æ€æ ‡è¯†ï¼Œç³»ç»Ÿçº§å¸¸é‡
+     * byæ›¾æ™º
      */
-    //ÉèÁ¢µÇ¼Ç×´Ì¬£¨Íê³É£©
+    //è®¾ç«‹ç™»è®°çŠ¶æ€ï¼ˆå®Œæˆï¼‰
     public static String REG_TAXREGSTATUS_FINISHED = "01";
-    //ÉèÁ¢µÇ¼Ç×´Ì¬£¨Î´Íê³É£©
+    //è®¾ç«‹ç™»è®°çŠ¶æ€ï¼ˆæœªå®Œæˆï¼‰
     public static String REG_TAXREGSTATUS_UNFINISHED = "00";
 
     /**
-     *ÔİÊÕ¿îÀàĞÍ: 01--·¢Æ±±£Ö¤½ğ  02--Ô¤½ÉË°¿î±£Ö¤½ğ  03--ÅÄÂô¿î
+     *æš‚æ”¶æ¬¾ç±»å‹: 01--å‘ç¥¨ä¿è¯é‡‘  02--é¢„ç¼´ç¨æ¬¾ä¿è¯é‡‘  03--æ‹å–æ¬¾
      * add by wangbangcai
      */
     public static final String TMPAMOUNTCODE_INVPAY = "01";

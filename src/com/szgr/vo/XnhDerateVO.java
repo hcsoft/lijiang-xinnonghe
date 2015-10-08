@@ -13,7 +13,7 @@ import java.io.Serializable;
 * <p>Company: thtf yun nan Branch</p>
 * @author PdmToVoGen1.0 
 * @version 1.0
-* @create datetime 2015-09-09 15:00:54.679
+* @create datetime 2015-10-03 11:54:00.55
 */
 
 public class XnhDerateVO implements Serializable, Cloneable {
@@ -22,8 +22,12 @@ public class XnhDerateVO implements Serializable, Cloneable {
     private java.lang.String serialno;
     //user_id
     private java.lang.String user_id;
+    //union_id
+    private java.lang.String union_id;
+    //card_id
+    private java.lang.String card_id;
     //住院起时间
-    private java.util.Date hospital_begindate2;
+    private java.util.Date hospital_begindate;
     //住院止时间
     private java.util.Date hospital_enddate;
     //诊断
@@ -38,10 +42,14 @@ public class XnhDerateVO implements Serializable, Cloneable {
     private java.math.BigDecimal derate_amount;
     //累计减免金额
     private java.math.BigDecimal derate_sumamount;
-    //opt_orgcode
+    //医生
+    private java.lang.String doctor;
+    //医疗机构
     private java.lang.String opt_orgcode;
     //opt_empcode
     private java.lang.String opt_empcode;
+    //optdate
+    private java.util.Date optdate;
     
     private int muteFlag;
     
@@ -69,12 +77,28 @@ public class XnhDerateVO implements Serializable, Cloneable {
         this.user_id = user_id;
     }
 
-    public java.util.Date getHospital_begindate2() {
-        return this.hospital_begindate2;
+    public java.lang.String getUnion_id() {
+        return this.union_id;
     }
 
-    public void setHospital_begindate2(java.util.Date hospital_begindate2) {
-        this.hospital_begindate2 = hospital_begindate2;
+    public void setUnion_id(java.lang.String union_id) {
+        this.union_id = union_id;
+    }
+
+    public java.lang.String getCard_id() {
+        return this.card_id;
+    }
+
+    public void setCard_id(java.lang.String card_id) {
+        this.card_id = card_id;
+    }
+
+    public java.util.Date getHospital_begindate() {
+        return this.hospital_begindate;
+    }
+
+    public void setHospital_begindate(java.util.Date hospital_begindate) {
+        this.hospital_begindate = hospital_begindate;
     }
 
     public java.util.Date getHospital_enddate() {
@@ -133,6 +157,14 @@ public class XnhDerateVO implements Serializable, Cloneable {
         this.derate_sumamount = derate_sumamount;
     }
 
+    public java.lang.String getDoctor() {
+        return this.doctor;
+    }
+
+    public void setDoctor(java.lang.String doctor) {
+        this.doctor = doctor;
+    }
+
     public java.lang.String getOpt_orgcode() {
         return this.opt_orgcode;
     }
@@ -149,6 +181,14 @@ public class XnhDerateVO implements Serializable, Cloneable {
         this.opt_empcode = opt_empcode;
     }
 
+    public java.util.Date getOptdate() {
+        return this.optdate;
+    }
+
+    public void setOptdate(java.util.Date optdate) {
+        this.optdate = optdate;
+    }
+
     public void setMuteFlag(int muteFlag) {
         this.muteFlag = muteFlag;
     }
@@ -160,7 +200,9 @@ public class XnhDerateVO implements Serializable, Cloneable {
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append("[user_id:").append(user_id).append("]");
-        sb.append("[hospital_begindate2:").append(hospital_begindate2).append("]");
+        sb.append("[union_id:").append(union_id).append("]");
+        sb.append("[card_id:").append(card_id).append("]");
+        sb.append("[hospital_begindate:").append(hospital_begindate).append("]");
         sb.append("[hospital_enddate:").append(hospital_enddate).append("]");
         sb.append("[diagnose:").append(diagnose).append("]");
         sb.append("[derate_type:").append(derate_type).append("]");
@@ -168,8 +210,10 @@ public class XnhDerateVO implements Serializable, Cloneable {
         sb.append("[actual_amount:").append(actual_amount).append("]");
         sb.append("[derate_amount:").append(derate_amount).append("]");
         sb.append("[derate_sumamount:").append(derate_sumamount).append("]");
+        sb.append("[doctor:").append(doctor).append("]");
         sb.append("[opt_orgcode:").append(opt_orgcode).append("]");
         sb.append("[opt_empcode:").append(opt_empcode).append("]");
+        sb.append("[optdate:").append(optdate).append("]");
         return sb.toString();
     }
 
